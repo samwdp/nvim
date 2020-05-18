@@ -20,9 +20,6 @@ set undodir=~/.vim/undodir
 set undofile
 set incsearch
 set termguicolors
-set shell=powershell.exe
-set shellpipe=|
-set shellredir=>
 
 "
 " Give more space for displaying messages.
@@ -41,6 +38,7 @@ highlight ColorColumn ctermbg=0 guibg=lightgrey
 call plug#begin('~\AppData\Local\nvim\plugged')
 
 Plug 'ptzz/lf.vim'
+Plug 'jreybert/vimagit'
 Plug 'rbgrouleff/bclose.vim'
 Plug 'OmniSharp/omnisharp-vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -54,7 +52,6 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'morhetz/gruvbox'
-Plug 'phanviet/vim-monokai-pro'
 Plug 'flazz/vim-colorschemes'
 
 call plug#end()
