@@ -1,0 +1,2 @@
+# Nvim
+NVIM init.rc
