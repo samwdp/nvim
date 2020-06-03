@@ -89,6 +89,7 @@ let g:netrw_winsize = 25
 
 nnoremap <leader>gs :G<CR>
 nnoremap <leader>gc :Gcommit<CR>
+nnoremap <leader>gp :Gpush<CR>
 nnoremap <leader>gj :diffget //3<CR>
 nnoremap <leader>gf :diffget //2<CR>
 nnoremap <leader>ot :terminal<CR>
