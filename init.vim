@@ -36,9 +36,13 @@ highlight ColorColumn ctermbg=0 guibg=lightgrey
 call plug#begin('~\AppData\Local\nvim\plugged')
 
 Plug 'ptzz/lf.vim'
+<<<<<<< HEAD
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-dadbod'
 Plug 'tpope/vim-markdown'
+=======
+Plug 'jreybert/vimagit'
+>>>>>>> eae2f3d6c2c5bbf4344cc90cb24dc8e0739679df
 Plug 'rbgrouleff/bclose.vim'
 Plug 'OmniSharp/omnisharp-vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -50,8 +54,12 @@ Plug 'sheerun/vim-polyglot'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'vim-airline/vim-airline'
+<<<<<<< HEAD
 Plug 'gruvbox-community/gruvbox'
 Plug 'phanviet/vim-monokai-pro'
+=======
+Plug 'morhetz/gruvbox'
+>>>>>>> eae2f3d6c2c5bbf4344cc90cb24dc8e0739679df
 Plug 'flazz/vim-colorschemes'
 
 call plug#end()
