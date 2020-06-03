@@ -2,7 +2,6 @@ syntax on
 
 set guicursor=
 set noshowmatch
-set relativenumber
 set nohlsearch
 set hidden
 set noerrorbells
@@ -11,20 +10,16 @@ set shiftwidth=4
 set expandtab
 set smartindent
 set guifont="Fira Code"
-set nu
+set nu rnu
 set nowrap
 set smartcase
 set noswapfile
 set nobackup
-set undodir=~/.vim/undodir
+set undodir=~\AppData\Local\nvim\undodir
 set undofile
 set incsearch
 set termguicolors
-set shell=powershell.exe
-set shellpipe=|
-set shellredir=>
 
-"
 " Give more space for displaying messages.
 set cmdheight=2
 
@@ -41,19 +36,21 @@ highlight ColorColumn ctermbg=0 guibg=lightgrey
 call plug#begin('~\AppData\Local\nvim\plugged')
 
 Plug 'ptzz/lf.vim'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-dadbod'
+Plug 'tpope/vim-markdown'
 Plug 'rbgrouleff/bclose.vim'
 Plug 'OmniSharp/omnisharp-vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'jremmen/vim-ripgrep'
 Plug 'tweekmonster/gofmt.vim'
-Plug 'tpope/vim-fugitive'
 Plug 'vim-utils/vim-man'
 Plug 'mbbill/undotree'
 Plug 'sheerun/vim-polyglot'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'vim-airline/vim-airline'
-Plug 'morhetz/gruvbox'
+Plug 'gruvbox-community/gruvbox'
 Plug 'phanviet/vim-monokai-pro'
 Plug 'flazz/vim-colorschemes'
 
@@ -91,6 +88,7 @@ let g:netrw_banner = 0
 let g:netrw_winsize = 25
 
 nnoremap <leader>gs :G<CR>
+nnoremap <leader>gc :Gcommit<CR>
 nnoremap <leader>gj :diffget //3<CR>
 nnoremap <leader>gf :diffget //2<CR>
 nnoremap <leader>ot :terminal<CR>
