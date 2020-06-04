@@ -36,15 +36,14 @@ highlight ColorColumn ctermbg=0 guibg=lightgrey
 call plug#begin('~\AppData\Local\nvim\plugged')
 
 Plug 'ptzz/lf.vim'
-<<<<<<< HEAD
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-dadbod'
 Plug 'tpope/vim-markdown'
-=======
 Plug 'jreybert/vimagit'
->>>>>>> eae2f3d6c2c5bbf4344cc90cb24dc8e0739679df
 Plug 'rbgrouleff/bclose.vim'
 Plug 'OmniSharp/omnisharp-vim'
+Plug 'OrangeT/vim-csharp'
+Plug 'puremourning/vimspector'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'jremmen/vim-ripgrep'
 Plug 'tweekmonster/gofmt.vim'
@@ -54,13 +53,10 @@ Plug 'sheerun/vim-polyglot'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'vim-airline/vim-airline'
-<<<<<<< HEAD
 Plug 'gruvbox-community/gruvbox'
 Plug 'phanviet/vim-monokai-pro'
-=======
-Plug 'morhetz/gruvbox'
->>>>>>> eae2f3d6c2c5bbf4344cc90cb24dc8e0739679df
 Plug 'flazz/vim-colorschemes'
+Plug 'honza/vim-snippets'
 
 call plug#end()
 
@@ -94,6 +90,8 @@ let g:netrw_browse_split = 2
 let g:vrfr_rg = 'true'
 let g:netrw_banner = 0
 let g:netrw_winsize = 25
+let g:coc_snippet_next = '<c-j>'
+let g:coc_snippet_previous = '<c-k>'
 
 nnoremap <leader>gs :G<CR>
 nnoremap <leader>gc :Gcommit<CR>
@@ -130,16 +128,19 @@ inoremap <buffer> <silent><expr> <TAB>
                 \ <SID>check_back_space() ? "\<TAB>" :
                 \ coc#refresh()
 
-    inoremap <buffer> <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-    inoremap <buffer> <silent><expr> <C-space> coc#refresh()
+inoremap <buffer> <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+inoremap <buffer> <silent><expr> <C-space> coc#refresh()
+imap <C-l> <Plug>(coc-snippets-expand)
 
-    " GoTo code navigation.
-    nmap <buffer> <leader>gd <Plug>(coc-definition)
-    nmap <buffer> <leader>gy <Plug>(coc-type-definition)
-    nmap <buffer> <leader>gi <Plug>(coc-implementation)
-    nmap <buffer> <leader>gr <Plug>(coc-references)
-    nmap <buffer> <leader>rr <Plug>(coc-rename)
-    nnoremap <buffer> <leader>cr :CocRestart
+vmap <C-j> <Plug>(coc-snippets-select)
+
+" GoTo code navigation.
+nmap <buffer> <leader>gd <Plug>(coc-definition)
+nmap <buffer> <leader>gy <Plug>(coc-type-definition)
+nmap <buffer> <leader>gi <Plug>(coc-implementation)
+nmap <buffer> <leader>gr <Plug>(coc-references)
+nmap <buffer> <leader>rr <Plug>(coc-rename)
+nnoremap <buffer> <leader>cr :CocRestart
 
 fun! TrimWhitespace()
     let l:save = winsaveview()
