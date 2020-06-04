@@ -21,6 +21,13 @@ let g:coc_global_extensions = [
     \ 'coc-json',
     \ 'coc-markdownlint',
     \ 'coc-marketplace',
+    \ 'coc-sql',
+    \ 'coc-sh',
+    \ 'coc-powershell',
+    \ 'coc-terminal',
+    \ 'coc-calc',
+    \ 'coc-gitignore',
+    \ 'coc-ccls',
     \ ]
 
 " Use tab for trigger completion with characters ahead and navigate.
@@ -46,6 +53,7 @@ else
   imap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 endif
 
+nnoremap <leader>cm :CocList marketplace<CR>
 " GoTo code navigation.
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)

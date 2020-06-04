@@ -15,6 +15,7 @@ nnoremap <leader>l :wincmd l<CR>
 nnoremap <leader>u :UndotreeShow<CR>
 nnoremap <leader>pv :wincmd v<bar> :Ex <bar> :vertical resize 30<CR>
 nnoremap <leader>e :CocCommand explorer<CR>
+nnoremap <leader>t :CocCommand terminal.toggle<CR>
 nnoremap <Leader>ps :Rg<SPACE>
 nnoremap <C-p> :Files<CR>
 nnoremap <Leader>pf :Files<CR>

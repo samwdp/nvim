@@ -1,6 +1,7 @@
 call plug#begin('~\AppData\Local\nvim\plugged')
 
 Plug 'ptzz/lf.vim'
+Plug 'ryanoasis/vim-devicons'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-dadbod'
 Plug 'tpope/vim-markdown'
