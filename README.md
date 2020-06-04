@@ -8,13 +8,13 @@ that. This can be translated into a UNIX OS by changing all the instances of
 
 All apsects of the config have been broken into separate places
 
-general
-|-> functions.vim
-|-> keybinds.vim
-|-> settinds.vim
-plugin
-|-> settings
-| |-> coc.vim
-| |-> polyglot.vim
-| |-> rainbow.vim
-|-> plugin.vim
++-- general
+| +-- functions.vim
+| +-- keybinds.vim
+| +-- settinds.vim
++-- plugin
+| | +-- settings
+| | +-- coc.vim
+| | +-- polyglot.vim
+| +-- rainbow.vim
+| +-- plugin.vim
