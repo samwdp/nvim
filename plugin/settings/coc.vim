@@ -180,3 +180,6 @@ let g:coc_snippet_prev = '<c-k>'
 
 " Use <C-j> for both expand and jump (make expand higher priority.)
 imap <C-j> <Plug>(coc-snippets-expand-jump)
+nnoremap <leader>e :CocCommand explorer<CR>
+nnoremap <leader>t :CocCommand terminal.toggle<CR>
+inoremap <buffer> <silent><expr> <C-space> coc#refresh()
