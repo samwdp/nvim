@@ -8,6 +8,7 @@ that. This can be translated into a UNIX OS by changing all the instances of
 
 All apsects of the config have been broken into separate places
 
+```bash
 +-- general
 | +-- functions.vim
 | +-- keybinds.vim
@@ -18,3 +19,4 @@ All apsects of the config have been broken into separate places
 | +-- polyglot.vim
 | +-- rainbow.vim
 | +-- plugin.vim
+```
