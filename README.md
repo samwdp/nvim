@@ -13,8 +13,8 @@ All apsects of the config have been broken into separate places
 | +-- keybinds.vim
 | +-- settinds.vim
 +-- plugin
-| | +-- settings
-| | +-- coc.vim
-| | +-- polyglot.vim
+| +-- settings
+| +-- coc.vim
+| +-- polyglot.vim
 | +-- rainbow.vim
 | +-- plugin.vim
