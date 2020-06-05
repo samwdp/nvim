@@ -10,6 +10,7 @@ set shiftwidth=4
 set expandtab
 set smartindent
 set guifont="FiraCode NF Retina"
+set cursorline                          " Enable highlighting of the current line
 set nu rnu
 set nowrap
 set smartcase

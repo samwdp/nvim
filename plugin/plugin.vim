@@ -42,9 +42,10 @@ Plug 'airblade/vim-rooter'
 Plug 'tpope/vim-sleuth'
 Plug 'justinmk/vim-sneak'
 Plug 'unblevable/quick-scope'
-Plug 'norcalli/nvim-colorizer.lua'
 Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'mhinz/vim-startify'
+Plug 'liuchengxu/vim-which-key'
+Plug 'ap/vim-buftabline'
 Plug 'junegunn/goyo.vim'
 call plug#end()
 

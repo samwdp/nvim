@@ -9,5 +9,6 @@ source ~\AppData\Local\nvim\plugin\settings\fugitive.vim
 source ~\AppData\Local\nvim\plugin\settings\fzf.vim
 source ~\AppData\Local\nvim\plugin\settings\polyglot.vim
 source ~\AppData\Local\nvim\plugin\settings\rainbow.vim
+source ~\AppData\Local\nvim\plugin\settings\tabline.vim
 source ~\AppData\Local\nvim\plugin\settings\undotree.vim
 source ~\AppData\Local\nvim\plugin\settings\vimagit.vim
