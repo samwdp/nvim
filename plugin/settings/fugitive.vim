@@ -1,6 +1,6 @@
-nnoremap <leader>vs :G<CR>
-nnoremap <leader>vc :Gcommit<CR>
-nnoremap <leader>vp :Gpush<CR>
-nnoremap <leader>vj :diffget //3<CR>
-nnoremap <leader>vf :diffget //2<CR>
+nnoremap <silent> <leader>gs :G<CR>
+nnoremap <silent> <leader>gc :Gcommit<CR>
+nnoremap <silent> <leader>gp :Gpush<CR>
+nnoremap <silent> <leader>gj :diffget //3<CR>
+nnoremap <silent> <leader>gf :diffget //2<CR>
 
