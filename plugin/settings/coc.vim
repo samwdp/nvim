@@ -161,8 +161,8 @@ let g:coc_explorer_global_presets = {
 \   }
 \ }
 "nmap <silent> <space>e :CocCommand explorer<CR>
-" nnoremap <silent> <leader>e :CocCommand explorer<CR>
-" nmap <space>f :CocCommand explorer --preset floatingRightside<CR>
+nnoremap <silent> <leader>e :CocCommand explorer<CR>
+nmap <space>f :CocCommand explorer --preset floatingRightside<CR>
 autocmd BufEnter * if (winnr("$") == 1 && &filetype == 'coc-explorer') | q | endif
 
 " Snippets
@@ -180,6 +180,4 @@ let g:coc_snippet_prev = '<c-k>'
 
 " Use <C-j> for both expand and jump (make expand higher priority.)
 imap <C-j> <Plug>(coc-snippets-expand-jump)
-nnoremap <leader>e :CocCommand explorer<CR>
-nnoremap <leader>t :CocCommand terminal.toggle<CR>
 inoremap <buffer> <silent><expr> <C-space> coc#refresh()

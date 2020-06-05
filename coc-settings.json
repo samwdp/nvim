@@ -31,7 +31,7 @@
     "UltiSnips",
     "~\\AppData\\local\\nvim\\snips"
   ],
-  "explorer.width": 100,
+  "explorer.width": 60,
   "explorer.icon.enableNerdfont": true,
   "explorer.previewAction.onHover": false,
   "explorer.icon.enableVimDevicons": false,

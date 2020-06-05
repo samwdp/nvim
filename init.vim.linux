@@ -1,0 +1,15 @@
+source $HOME/.config/nvim/plugin/plugin.vim
+source $HOME/.config/nvim/general/settings.vim
+source $HOME/.config/nvim/general/functions.vim
+source $HOME/.config/nvim/general/keybinds.vim
+
+" Plugin Settings
+source $HOME/.config/nvim/plugin/settings/coc.vim
+source $HOME/.config/nvim/plugin/settings/fugitive.vim
+source $HOME/.config/nvim/plugin/settings/fzf.vim
+source $HOME/.config/nvim/plugin/settings/polyglot.vim
+source $HOME/.config/nvim/plugin/settings/quickscope.vim
+source $HOME/.config/nvim/plugin/settings/rainbow.vim
+source $HOME/.config/nvim/plugin/settings/tabline.vim
+source $HOME/.config/nvim/plugin/settings/undotree.vim
+source $HOME/.config/nvim/plugin/settings/vimagit.vim
