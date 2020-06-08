@@ -13,3 +13,5 @@ source ~\AppData\Local\nvim\plugin\settings\rainbow.vim
 source ~\AppData\Local\nvim\plugin\settings\tabline.vim
 source ~\AppData\Local\nvim\plugin\settings\undotree.vim
 source ~\AppData\Local\nvim\plugin\settings\vimagit.vim
+
+luafile ~\AppData\Local\nvim\lua\plug-colorizer.lua
