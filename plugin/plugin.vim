@@ -7,6 +7,8 @@ Plug 'tpope/vim-dadbod'
 Plug 'tpope/vim-markdown'
 Plug 'jreybert/vimagit'
 Plug 'rbgrouleff/bclose.vim'
+" Net core development
+Plug 'adamclerk/vim-razor'
 Plug 'OmniSharp/omnisharp-vim'
 Plug 'OrangeT/vim-csharp'
 Plug 'puremourning/vimspector'

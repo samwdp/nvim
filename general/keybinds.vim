@@ -6,6 +6,7 @@ nnoremap <leader>j :wincmd j<CR>
 nnoremap <leader>k :wincmd k<CR>
 nnoremap <leader>l :wincmd l<CR>
 nnoremap <leader>pv :wincmd v<bar> :Ex <bar> :vertical resize 30<CR>
+nnoremap <leader>bd :bd<CR>
 
 nnoremap <Leader><CR> :so ~\AppData\Local\nvim\init.vim<CR>
 nnoremap <Leader>+ :vertical resize +5<CR>
