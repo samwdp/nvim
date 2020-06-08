@@ -1,5 +1,6 @@
 call plug#begin('~\AppData\Local\nvim\plugged')
 
+Plug 'norcalli/nvim-colorizer.lua'
 Plug 'ptzz/lf.vim'
 Plug 'ryanoasis/vim-devicons'
 Plug 'tpope/vim-fugitive'
