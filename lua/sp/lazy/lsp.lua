@@ -29,8 +29,12 @@ return {
                 "lua_ls",
                 "rust_analyzer",
                 "tsserver",
-                "omnisharp",
+                "csharp_ls",
                 "ols",
+                "html",
+                "htmx",
+                "tailwindcss",
+                "cssls",
             },
             handlers = {
                 function(server_name) -- default handler (optional)
@@ -74,6 +78,7 @@ return {
                 { name = 'luasnip' }, -- For luasnip users.
             }, {
                 { name = 'buffer' },
+                { name = 'path' },
             })
         })
 
