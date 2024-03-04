@@ -1,5 +1,5 @@
 return {
-    "ellisonleao/gruvbox.nvim",
+    "samwdp/gruvbox.nvim",
     priority = 1000,
     config = function()
         -- Default options:
@@ -9,11 +9,11 @@ return {
             underline = true,
             bold = true,
             italic = {
-                strings = true,
-                emphasis = true,
-                comments = true,
+                strings = false,
+                emphasis = false,
+                comments = false,
                 operators = false,
-                folds = true,
+                folds = false,
             },
             strikethrough = true,
             invert_selection = false,

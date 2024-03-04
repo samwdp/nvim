@@ -29,7 +29,7 @@ return {
                 "lua_ls",
                 "rust_analyzer",
                 "tsserver",
-                "csharp_ls",
+                "omnisharp",
                 "ols",
                 "html",
                 "htmx",
