@@ -39,7 +39,7 @@ return {
                     -- needed if i did not set the branch up correctly
                     vim.keymap.set("n", "<leader>t", ":Git push -u origin ", opts);
                     vim.keymap.set("n", "ff", ":Git fetch --prune<CR>", opts);
-                    vim.keymap.set("n", "ff", ":Git pull --rebase<CR>", opts);
+                    vim.keymap.set("n", "fF", ":Git pull --rebase<CR>", opts);
                 end,
             })
 
