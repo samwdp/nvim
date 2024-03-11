@@ -4,11 +4,11 @@ return {
         config = function()
             vim.keymap.set("n", "<leader>gs", vim.cmd.Git)
 
-            local ThePrimeagen_Fugitive = vim.api.nvim_create_augroup("ThePrimeagen_Fugitive", {})
+            local sp_Fugitive = vim.api.nvim_create_augroup("sp_Fugitive", {})
 
             local autocmd = vim.api.nvim_create_autocmd
             autocmd("BufWinEnter", {
-                group = ThePrimeagen_Fugitive,
+                group = sp_Fugitive,
                 pattern = "*",
                 callback = function()
                     if vim.bo.ft ~= "fugitive" then
@@ -20,8 +20,26 @@ return {
                     vim.keymap.set("n", "<leader>p", function()
                         vim.cmd.Git('push')
                     end, opts)
-                    -- vim.keymap.set("n", "cc",":wq<CR>", opts)
-                    -- vim.keymap.set("n", "ck",":q<CR>", opts)
+
+                    vim.keymap.set("n", "pp", function()
+                        vim.cmd.Git('push')
+                    end, opts)
+
+                    vim.keymap.set("n", "<leader>F", function()
+                        vim.cmd.Git('pull')
+                    end, opts)
+
+                    vim.keymap.set("n", "<leader>f", function()
+                        vim.cmd.Git('fetch')
+                    end, opts)
+
+                    -- vim.keymap.set("n", "fF", function()
+                    --     vim.cmd.Git( 'pull', '--rebase' )
+                    -- end, opts)
+                    --
+                    -- vim.keymap.set("n", "ff", function()
+                    --     vim.cmd.Git({ 'fetch', '--prune' })
+                    -- end, opts)
 
                     -- rebase always
                     vim.keymap.set("n", "<leader>P", function()
