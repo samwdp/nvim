@@ -17,9 +17,6 @@ return {
 
                     local bufnr = vim.api.nvim_get_current_buf()
                     local opts = { buffer = bufnr, remap = false }
-                    vim.keymap.set("n", "<leader>p", function()
-                        vim.cmd.Git('push')
-                    end, opts)
 
                     vim.keymap.set("n", "pp", function()
                         vim.cmd.Git('push')
@@ -33,14 +30,6 @@ return {
                         vim.cmd.Git('fetch')
                     end, opts)
 
-                    -- vim.keymap.set("n", "fF", function()
-                    --     vim.cmd.Git( 'pull', '--rebase' )
-                    -- end, opts)
-                    --
-                    -- vim.keymap.set("n", "ff", function()
-                    --     vim.cmd.Git({ 'fetch', '--prune' })
-                    -- end, opts)
-
                     -- rebase always
                     vim.keymap.set("n", "<leader>P", function()
                         vim.cmd.Git({ 'pull', '--rebase' })
@@ -49,6 +38,8 @@ return {
                     -- NOTE: It allows me to easily set the branch i am pushing and any tracking
                     -- needed if i did not set the branch up correctly
                     vim.keymap.set("n", "<leader>t", ":Git push -u origin ", opts);
+                    vim.keymap.set("n", "ff", ":Git fetch --prune<CR>", opts);
+                    vim.keymap.set("n", "ff", ":Git pull --rebase<CR>", opts);
                 end,
             })
 
