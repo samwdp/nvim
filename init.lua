@@ -244,56 +244,56 @@ vim.opt.rtp:prepend(lazypath)
 -- NOTE: Here is where you install your plugins.
 require("lazy").setup(
   {
-      {
-    "tpope/vim-fugitive",
-    config = function()
-      vim.keymap.set("n", "<leader>gs", vim.cmd.Git)
+    {
+      "tpope/vim-fugitive",
+      config = function()
+        vim.keymap.set("n", "<leader>gs", vim.cmd.Git)
 
-      local sp_Fugitive = vim.api.nvim_create_augroup("sp_Fugitive", {})
+        local sp_Fugitive = vim.api.nvim_create_augroup("sp_Fugitive", {})
 
-      local autocmd = vim.api.nvim_create_autocmd
-      autocmd("BufWinEnter", {
-        group = sp_Fugitive,
-        pattern = "*",
-        callback = function()
-          if vim.bo.ft ~= "fugitive" then
-            return
-          end
+        local autocmd = vim.api.nvim_create_autocmd
+        autocmd("BufWinEnter", {
+          group = sp_Fugitive,
+          pattern = "*",
+          callback = function()
+            if vim.bo.ft ~= "fugitive" then
+              return
+            end
 
-          local bufnr = vim.api.nvim_get_current_buf()
-          local opts = { buffer = bufnr, remap = false }
+            local bufnr = vim.api.nvim_get_current_buf()
+            local opts = { buffer = bufnr, remap = false }
 
-          vim.keymap.set("n", "pp", function()
-            vim.cmd.Git('push')
-          end, opts)
+            vim.keymap.set("n", "pp", function()
+              vim.cmd.Git('push')
+            end, opts)
 
-          vim.keymap.set("n", "<leader>F", function()
-            vim.cmd.Git('pull')
-          end, opts)
+            vim.keymap.set("n", "<leader>F", function()
+              vim.cmd.Git('pull')
+            end, opts)
 
-          vim.keymap.set("n", "<leader>f", function()
-            vim.cmd.Git('fetch')
-          end, opts)
+            vim.keymap.set("n", "<leader>f", function()
+              vim.cmd.Git('fetch')
+            end, opts)
 
-          -- rebase always
-          vim.keymap.set("n", "<leader>P", function()
-            vim.cmd.Git({ 'pull', '--rebase' })
-          end, opts)
+            -- rebase always
+            vim.keymap.set("n", "<leader>P", function()
+              vim.cmd.Git({ 'pull', '--rebase' })
+            end, opts)
 
-          -- NOTE: It allows me to easily set the branch i am pushing and any tracking
-          -- needed if i did not set the branch up correctly
-          vim.keymap.set("n", "<leader>t", ":Git push -u origin ", opts);
-          vim.keymap.set("n", "ff", ":Git fetch --prune<CR>", opts);
-          vim.keymap.set("n", "fF", ":Git pull --rebase<CR>", opts);
-        end,
-      })
+            -- NOTE: It allows me to easily set the branch i am pushing and any tracking
+            -- needed if i did not set the branch up correctly
+            vim.keymap.set("n", "<leader>t", ":Git push -u origin ", opts);
+            vim.keymap.set("n", "ff", ":Git fetch --prune<CR>", opts);
+            vim.keymap.set("n", "fF", ":Git pull --rebase<CR>", opts);
+          end,
+        })
 
 
-      vim.keymap.set("n", "gu", "<cmd>diffget //2<CR>")
-      vim.keymap.set("n", "gh", "<cmd>diffget //3<CR>")
-    end
-  },
-
+        vim.keymap.set("n", "gu", "<cmd>diffget //2<CR>")
+        vim.keymap.set("n", "gh", "<cmd>diffget //3<CR>")
+      end
+    },
+    "dm1try/golden_size",
     -- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
     "tpope/vim-sleuth", -- Detect tabstop and shiftwidth automatically
 
@@ -342,7 +342,7 @@ require("lazy").setup(
     -- after the plugin has been loaded:
     --  config = function() ... end
 
-    {                   -- Useful plugin to show you pending keybinds.
+    {                     -- Useful plugin to show you pending keybinds.
       "folke/which-key.nvim",
       event = "VimEnter", -- Sets the loading event to 'VimEnter'
       config = function() -- This is the function that runs, AFTER loading
@@ -855,7 +855,7 @@ require("lazy").setup(
           function()
             return "▊"
           end,
-          color = { fg = colors.blue },    -- Sets highlighting of component
+          color = { fg = colors.blue },      -- Sets highlighting of component
           padding = { left = 0, right = 1 }, -- We don't need space before this
         })
 
@@ -951,7 +951,7 @@ require("lazy").setup(
 
         -- Add components to right sections
         ins_right({
-          "o:encoding",     -- option component same as &encoding in viml
+          "o:encoding",       -- option component same as &encoding in viml
           fmt = string.upper, -- I'm not sure why it's upper case either ;)
           cond = conditions.hide_in_width,
           color = { fg = colors.green, gui = "bold" },
@@ -1017,7 +1017,7 @@ require("lazy").setup(
           invert_tabline = false,
           invert_intend_guides = false,
           inverse = true, -- invert background for search, diffs, statuslines and errors
-          contrast = "", -- can be "hard", "soft" or empty string
+          contrast = "",  -- can be "hard", "soft" or empty string
           palette_overrides = {},
           overrides = {},
           dim_inactive = false,
