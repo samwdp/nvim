@@ -8,9 +8,6 @@ vim.g.have_nerd_font = false
 vim.opt.number = true
 vim.opt.relativenumber = true
 
--- Enable mouse mode, can be useful for resizing splits for example!
-vim.opt.mouse = "a"
-
 -- Don't show the mode, since it's already in the status line
 vim.opt.showmode = false
 
@@ -31,7 +28,7 @@ vim.opt.smartcase = true
 vim.opt.signcolumn = "yes"
 
 -- Decrease update time
-vim.opt.updatetime = 250
+vim.opt.updatetime = 50
 
 -- Decrease mapped sequence wait time
 -- Displays which-key popup sooner
@@ -78,6 +75,8 @@ vim.keymap.set("n", "<C-h>", ":wincmd h<CR>", { desc = "Window Right" })
 vim.keymap.set("n", "<C-j>", ":wincmd j<CR>", { desc = "Window Down" })
 vim.keymap.set("n", "<C-k>", ":wincmd k<CR>", { desc = "Window Up" })
 vim.keymap.set("n", "<C-l>", ":wincmd l<CR>", { desc = "Window Left" })
+vim.keymap.set("n", "<C-L>", ":tabnext<CR>", { desc = "Next Tab" })
+vim.keymap.set("n", "<C-H>", ":tabprev<CR>", { desc = "Previous Tab" })
 vim.keymap.set("n", "<leader>ws", ":vs<CR>", { desc = "Split window vertically" })
 vim.keymap.set("n", "<leader>bd", vim.cmd.bdelete, { desc = "Delete buffer" })
 vim.keymap.set("n", "<leader>wd", ":wincmd q<CR>", { desc = "Delete window" })
