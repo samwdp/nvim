@@ -2,7 +2,7 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 -- Set to true if you have a Nerd Font installed
-vim.g.have_nerd_font = false
+vim.g.have_nerd_font = true
 
 -- Make line numbers default
 vim.opt.number = true
@@ -250,6 +250,7 @@ require("lazy").setup(
         "github/copilot.vim",
         { -- LSP Configuration & Plugins
             "neovim/nvim-lspconfig",
+            opts = { inlay_hints = { enabled = true } },
             dependencies = {
                 -- Automatically install LSPs and related tools to stdpath for Neovim
                 "williamboman/mason.nvim",
@@ -265,6 +266,20 @@ require("lazy").setup(
                 { "folke/neodev.nvim", opts = {} },
             },
             config = function()
+                vim.diagnostic.config({
+                    -- update_in_insert = true,
+                    float = {
+                        focusable = false,
+                        style = "minimal",
+                        border = "rounded",
+                        source = "always",
+                        header = "",
+                        prefix = "",
+                    },
+                })
+                vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+                    border = "rounded",
+                })
                 vim.api.nvim_create_autocmd("LspAttach", {
                     group = vim.api.nvim_create_augroup("kickstart-lsp-attach", { clear = true }),
                     callback = function(event)
@@ -380,7 +395,6 @@ require("lazy").setup(
                 local cmp = require("cmp")
                 local luasnip = require("luasnip")
                 luasnip.config.setup({})
-
                 cmp.setup({
                     snippet = {
                         expand = function(args)
@@ -388,7 +402,10 @@ require("lazy").setup(
                         end,
                     },
                     completion = { completeopt = "menu,menuone,noinsert" },
-
+                    window = {
+                        completion = cmp.config.window.bordered(),
+                        documentation = cmp.config.window.bordered(),
+                    },
                     mapping = cmp.mapping.preset.insert({
                         -- Select the [n]ext item
                         ["<C-n>"] = cmp.mapping.select_next_item(),
