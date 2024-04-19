@@ -71,18 +71,16 @@ vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Go to previous [D]
 vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Go to next [D]iagnostic message" })
 vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Show diagnostic [E]rror messages" })
 vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
-vim.keymap.set("n", "<leader>ww", vim.cmd.write, { desc = "Write File" })
-vim.keymap.set("n", "<leader>wW", ":wq <CR>", { desc = "Write and quit" })
+vim.keymap.set("n", "<leader>w", vim.cmd.write, { desc = "Write File" })
+vim.keymap.set("n", "<leader>W", ":wq <CR>", { desc = "Write and quit" })
 vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
 vim.keymap.set("n", "<C-h>", ":wincmd h<CR>", { desc = "Window Right" })
 vim.keymap.set("n", "<C-j>", ":wincmd j<CR>", { desc = "Window Down" })
 vim.keymap.set("n", "<C-k>", ":wincmd k<CR>", { desc = "Window Up" })
 vim.keymap.set("n", "<C-l>", ":wincmd l<CR>", { desc = "Window Left" })
-vim.keymap.set("n", "<C-L>", ":tabnext<CR>", { desc = "Next Tab" })
-vim.keymap.set("n", "<C-H>", ":tabprev<CR>", { desc = "Previous Tab" })
-vim.keymap.set("n", "<leader>ws", ":vs<CR>", { desc = "Split window vertically" })
-vim.keymap.set("n", "<leader>bd", vim.cmd.bdelete, { desc = "Delete buffer" })
-vim.keymap.set("n", "<leader>wd", ":wincmd q<CR>", { desc = "Delete window" })
+vim.keymap.set("n", "<leader>vs", ":vs<CR>", { desc = "[V]ertical [S]plit" })
+vim.keymap.set("n", "<leader>db", vim.cmd.bdelete, { desc = "[D]elete [B]uffer" })
+vim.keymap.set("n", "<leader>dw", ":wincmd q<CR>", { desc = "[D]elete [W]indow" })
 vim.keymap.set("n", "<leader>pv", vim.cmd.Ex, { desc = "Open" })
 
 vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
@@ -250,12 +248,12 @@ require("lazy").setup(
         "github/copilot.vim",
         { -- LSP Configuration & Plugins
             "neovim/nvim-lspconfig",
-            opts = { inlay_hints = { enabled = true } },
             dependencies = {
                 -- Automatically install LSPs and related tools to stdpath for Neovim
                 "williamboman/mason.nvim",
                 "williamboman/mason-lspconfig.nvim",
                 "WhoIsSethDaniel/mason-tool-installer.nvim",
+                "Hoffs/omnisharp-extended-lsp.nvim",
 
                 -- Useful status updates for LSP.
                 -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
@@ -265,6 +263,7 @@ require("lazy").setup(
                 -- used for completion, annotations and signatures of Neovim apis
                 { "folke/neodev.nvim", opts = {} },
             },
+            opts = { inlay_hints = { enabled = true } },
             config = function()
                 vim.diagnostic.config({
                     -- update_in_insert = true,
@@ -294,6 +293,30 @@ require("lazy").setup(
                         end
                         vim.keymap.set("n", "<leader>vca", function() vim.lsp.buf.code_action() end, opts)
 
+
+                        vim.keymap.set("n", "<leader>gd",
+                            function()
+                                require('omnisharp_extended').telescope_lsp_definition({ jump_type = "vsplit" })
+                            end,
+                            { buffer = event.buf, desc = "[G]oto [D]efinition (decompile)" })
+
+                        -- vim.keymap.set("n", "<leader>gD",
+                        --     function()
+                        --         require('omnisharp_extended').telescope_lsp_type_definition()
+                        --     end,
+                        --     { buffer = event.buf, desc = "[G]oto Type [D]efinition (decompile)" })
+                        --
+                        -- vim.keymap.set("n", "<leader>gr",
+                        --     function()
+                        --         require('omnisharp_extended').telescope_lsp_references()
+                        --     end,
+                        --     { buffer = event.buf, desc = "[G]oto [R]eferences (decompile)" })
+                        -- vim.keymap.set("n", "<leader>gi",
+                        --     function()
+                        --         require('omnisharp_extended').telescope_lsp_implementation()
+                        --     end,
+                        --     { buffer = event.buf, desc = "[G]oto [I]mplementation (decompile)" })
+
                         map("gd", require("telescope.builtin").lsp_definitions, "[G]oto [D]efinition")
                         map("gr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
                         map("gi", require("telescope.builtin").lsp_implementations, "[G]oto [I]mplementation")
@@ -307,7 +330,17 @@ require("lazy").setup(
                         map("K", vim.lsp.buf.hover, "Hover Documentation")
                         map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
 
+                        if vim.lsp.inlay_hint then
+                            vim.keymap.set("n", "<leader>ih", function()
+                                vim.lsp.inlay_hint.enable(0, not vim.lsp.inlay_hint.is_enabled())
+                            end, { buffer = event.buf, desc = "Toggle [I]nlay [H]int" })
+                        end
+
                         local client = vim.lsp.get_client_by_id(event.data.client_id)
+                        if client and client.server_capabilities.inlayHintProvider then
+                            vim.lsp.inlay_hint.enable(0, not vim.lsp.inlay_hint.is_enabled())
+                            vim.api.nvim_set_hl(0, "LspInlayHint", {fg = require('gruvbox').palette.dark4})
+                        end
                         if client and client.server_capabilities.documentHighlightProvider then
                             vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
                                 buffer = event.buf,
@@ -326,14 +359,59 @@ require("lazy").setup(
                 capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
 
                 local servers = {
-                    gopls = {},
+                    gopls = {
+                        settings = {
+                            gopls = {
+                                ["ui.inlayhint.hints"] = {
+                                    copositeLiteralFields = true,
+                                    constantValues = true,
+                                    parameterNames = true,
+                                },
+                            },
+                        },
+                    },
                     tsserver = {},
-                    omnisharp = {},
+                    omnisharp = {
+                        settings = {
+                            FormattingOptions = {
+                                EnableEditorConfigSupport = true,
+                                OrganizeImports = true,
+                            },
+                            MsBuild = {
+                                LoadProjectsOnDemand = nil,
+                            },
+                            RoslynExtensionsOptions = {
+                                EnableAnalyzersSupport = true,
+                                EnableDecompilationSupport = true,
+                                InlayHintOptions = {
+                                    EnableForParameters = true,
+                                    ForLiteralParameters = true,
+                                    ForIndexerParameters = true,
+                                    ForOjbectCreationParameters = true,
+                                    ForLambdaParameterTypes = true,
+                                    ForImplicitVariableTypes = true,
+                                    ForImplicitObjectCreation = true,
+                                    ForOtherParameters = true,
+                                    EnableForTypes = true,
+
+
+                                },
+                                EnableImportCompletion = true,
+                                AnalyzeOpenDocumentsOnly = nil,
+                            },
+                            Sdk = {
+                                IncludePrereleases = true,
+                            },
+                        },
+                    },
                     lua_ls = {
                         settings = {
                             Lua = {
                                 completion = {
                                     callSnippet = "Replace",
+                                },
+                                hint = {
+                                    enable = true,
                                 },
                             },
                         },
@@ -724,7 +802,7 @@ require("lazy").setup(
             "nvim-treesitter/nvim-treesitter",
             build = ":TSUpdate",
             opts = {
-                ensure_installed = { "bash", "c", "html", "lua", "markdown", "vim", "vimdoc" },
+                ensure_installed = { "c", "html", "lua", "markdown" },
                 -- Autoinstall languages that are not installed
                 auto_install = true,
                 highlight = {
