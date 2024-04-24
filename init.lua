@@ -193,8 +193,34 @@ require("lazy").setup(
                 -- Useful for getting pretty icons, but requires a Nerd Font.
                 { "nvim-tree/nvim-web-devicons",            enabled = vim.g.have_nerd_font },
             },
-            config = function()
+            config = function(_, opts)
+                local actions = require("telescope.actions")
+
                 require("telescope").setup({
+                    defaults = {
+                        layout_strategy = "horizontal",
+                        layout_config = {
+                            horizontal = {
+                                prompt_position = "top",
+                            },
+                        },
+                        sorting_strategy = "ascending",
+                        initial_mode = "normal",
+                        mappings = {
+                            n = { ["q"] = require("telescope.actions").close },
+                        },
+                        border = {},
+                        color_devicons = true,
+                    },
+                    pickers = {
+                        buffers = {
+                            mappings = {
+                                i = {
+                                    ["<c-d>"] = actions.delete_buffer + actions.move_to_top,
+                                },
+                            },
+                        },
+                    },
                     extensions = {
                         ["ui-select"] = {
                             require("telescope.themes").get_dropdown(),
@@ -209,10 +235,8 @@ require("lazy").setup(
                 local builtin = require("telescope.builtin")
                 vim.keymap.set("n", "<leader>sh", builtin.help_tags, { desc = "[S]earch [H]elp" })
                 vim.keymap.set("n", "<leader>sk", builtin.keymaps, { desc = "[S]earch [K]eymaps" })
-                vim.keymap.set("n", "<leader>sf", builtin.git_files, { desc = "[S]earch [F]iles" })
                 vim.keymap.set("n", "<leader>.", builtin.find_files, { desc = "[S]earch [F]iles" })
                 vim.keymap.set("n", "<C-p>", builtin.git_files, { desc = "[S]earch [F]iles" })
-                vim.keymap.set("n", "<leader>ss", builtin.builtin, { desc = "[S]earch [S]elect Telescope" })
                 vim.keymap.set("n", "<leader>sw", builtin.grep_string, { desc = "[S]earch current [W]ord" })
                 vim.keymap.set("n", "<leader>sg", builtin.live_grep, { desc = "[S]earch by [G]rep" })
                 vim.keymap.set("n", "<leader>sd", builtin.diagnostics, { desc = "[S]earch [D]iagnostics" })
@@ -300,22 +324,6 @@ require("lazy").setup(
                             end,
                             { buffer = event.buf, desc = "[G]oto [D]efinition (decompile)" })
 
-                        -- vim.keymap.set("n", "<leader>gD",
-                        --     function()
-                        --         require('omnisharp_extended').telescope_lsp_type_definition()
-                        --     end,
-                        --     { buffer = event.buf, desc = "[G]oto Type [D]efinition (decompile)" })
-                        --
-                        -- vim.keymap.set("n", "<leader>gr",
-                        --     function()
-                        --         require('omnisharp_extended').telescope_lsp_references()
-                        --     end,
-                        --     { buffer = event.buf, desc = "[G]oto [R]eferences (decompile)" })
-                        -- vim.keymap.set("n", "<leader>gi",
-                        --     function()
-                        --         require('omnisharp_extended').telescope_lsp_implementation()
-                        --     end,
-                        --     { buffer = event.buf, desc = "[G]oto [I]mplementation (decompile)" })
 
                         map("gd", require("telescope.builtin").lsp_definitions, "[G]oto [D]efinition")
                         map("gr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
@@ -329,6 +337,8 @@ require("lazy").setup(
                         map("<leader>f", vim.lsp.buf.format, "[F]ormat Document")
                         map("K", vim.lsp.buf.hover, "Hover Documentation")
                         map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
+                        map("<leader>ss", require("telescope.builtin").lsp_document_symbols, "[S]earch [S]ymobls")
+                        map("<leader>sS", require("telescope.builtin").lsp_workspace_symbols, "[S]earch [S]ymobls")
 
                         if vim.lsp.inlay_hint then
                             vim.keymap.set("n", "<leader>ih", function()
@@ -339,7 +349,7 @@ require("lazy").setup(
                         local client = vim.lsp.get_client_by_id(event.data.client_id)
                         if client and client.server_capabilities.inlayHintProvider then
                             vim.lsp.inlay_hint.enable(0, not vim.lsp.inlay_hint.is_enabled())
-                            vim.api.nvim_set_hl(0, "LspInlayHint", {fg = require('gruvbox').palette.dark4})
+                            vim.api.nvim_set_hl(0, "LspInlayHint", { fg = require('gruvbox').palette.dark4 })
                         end
                         if client and client.server_capabilities.documentHighlightProvider then
                             vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
@@ -370,7 +380,35 @@ require("lazy").setup(
                             },
                         },
                     },
-                    tsserver = {},
+                    tsserver = {
+                        settings = {
+                            typescript = {
+                                inlayHints = {
+                                    includeInlayParameterNameHints = "all", -- 'none' | 'literals' | 'all'
+                                    includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+                                    includeInlayVariableTypeHints = true,
+                                    includeInlayFunctionParameterTypeHints = true,
+                                    includeInlayVariableTypeHintsWhenTypeMatchesName = true,
+                                    includeInlayPropertyDeclarationTypeHints = true,
+                                    includeInlayFunctionLikeReturnTypeHints = true,
+                                    includeInlayEnumMemberValueHints = true,
+                                },
+                            },
+                            javascript = {
+                                inlayHints = {
+                                    includeInlayParameterNameHints = "all", -- 'none' | 'literals' | 'all'
+                                    includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+                                    includeInlayVariableTypeHints = true,
+
+                                    includeInlayFunctionParameterTypeHints = true,
+                                    includeInlayVariableTypeHintsWhenTypeMatchesName = true,
+                                    includeInlayPropertyDeclarationTypeHints = true,
+                                    includeInlayFunctionLikeReturnTypeHints = true,
+                                    includeInlayEnumMemberValueHints = true,
+                                },
+                            },
+                        },
+                    },
                     omnisharp = {
                         settings = {
                             FormattingOptions = {
