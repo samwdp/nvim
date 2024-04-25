@@ -198,14 +198,6 @@ require("lazy").setup(
 
                 require("telescope").setup({
                     defaults = {
-                        layout_strategy = "horizontal",
-                        layout_config = {
-                            horizontal = {
-                                prompt_position = "top",
-                            },
-                        },
-                        sorting_strategy = "ascending",
-                        initial_mode = "normal",
                         mappings = {
                             n = { ["q"] = require("telescope.actions").close },
                         },
@@ -317,13 +309,11 @@ require("lazy").setup(
                         end
                         vim.keymap.set("n", "<leader>vca", function() vim.lsp.buf.code_action() end, opts)
 
-
                         vim.keymap.set("n", "<leader>gd",
                             function()
                                 require('omnisharp_extended').telescope_lsp_definition({ jump_type = "vsplit" })
                             end,
                             { buffer = event.buf, desc = "[G]oto [D]efinition (decompile)" })
-
 
                         map("gd", require("telescope.builtin").lsp_definitions, "[G]oto [D]efinition")
                         map("gr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
@@ -342,13 +332,13 @@ require("lazy").setup(
 
                         if vim.lsp.inlay_hint then
                             vim.keymap.set("n", "<leader>ih", function()
-                                vim.lsp.inlay_hint.enable(0, not vim.lsp.inlay_hint.is_enabled())
+                                vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
                             end, { buffer = event.buf, desc = "Toggle [I]nlay [H]int" })
                         end
 
                         local client = vim.lsp.get_client_by_id(event.data.client_id)
                         if client and client.server_capabilities.inlayHintProvider then
-                            vim.lsp.inlay_hint.enable(0, not vim.lsp.inlay_hint.is_enabled())
+                            vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
                             vim.api.nvim_set_hl(0, "LspInlayHint", { fg = require('gruvbox').palette.dark4 })
                         end
                         if client and client.server_capabilities.documentHighlightProvider then
