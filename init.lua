@@ -56,7 +56,9 @@ vim.opt.scrolloff = 10
 -- Set highlight on search, but clear on pressing <Esc> in normal mode
 vim.opt.hlsearch = true
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
-vim.keymap.set("n", "<leader>pv", "<cmd>Oil<CR>")
+vim.keymap.set("n", "<leader>pv", function()
+    require("oil").toggle_float()
+end)
 -- greatest remap ever
 vim.keymap.set("x", "<leader>p", [["_dP]])
 
@@ -135,20 +137,10 @@ require("lazy").setup(
                 vim.keymap.set("n", "<C-i>", function() harpoon:list():select(4) end, { desc = "Select Harpoon item 4" })
             end
         },
-        {
-            "dm1try/golden_size"
-        },
         { "numToStr/Comment.nvim", opts = {} },
         { -- Adds git related signs to the gutter, as well as utilities for managing changes
             "lewis6991/gitsigns.nvim",
             opts = {
-                signs = {
-                    add = { text = "+" },
-                    change = { text = "~" },
-                    delete = { text = "_" },
-                    topdelete = { text = "‾" },
-                    changedelete = { text = "~" },
-                },
             },
         },
         {                       -- Useful plugin to show you pending keybinds.
@@ -445,7 +437,11 @@ require("lazy").setup(
                     },
                 }
 
-                require("mason").setup()
+                require("mason").setup({
+                    ui = {
+                        border = "rounded",
+                    },
+                })
                 local ensure_installed = vim.tbl_keys(servers or {})
                 vim.list_extend(ensure_installed, {
                     "stylua", -- Used to format Lua code
@@ -889,6 +885,12 @@ require("lazy").setup(
             "HiPhish/rainbow-delimiters.nvim"
         },
         {
+            'stevearc/dressing.nvim',
+            config = function()
+                require('dressing').setup()
+            end,
+        },
+        {
             'stevearc/oil.nvim',
 
             -- Optional dependencies
@@ -956,6 +958,7 @@ require("lazy").setup(
                         ["<CR>"] = "actions.select",
                         ["<C-s>"] = "actions.select_vsplit",
                         ["<C-c>"] = "actions.close",
+                        ["q"] = "actions.close",
                         ["<C-l>"] = "actions.refresh",
                         ["<C-S-o>"] = "actions.preview",
                         ["-"] = "actions.parent",
@@ -1068,6 +1071,12 @@ require("lazy").setup(
                     },
                 })
             end,
+        },
+        {
+            "nvim-focus/focus.nvim",
+            config = function()
+                require("focus").setup()
+            end
         },
     }, {
         ui = {
