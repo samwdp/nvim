@@ -29,6 +29,7 @@ vim.opt.smartcase = true
 
 -- Keep signcolumn on by default
 vim.opt.signcolumn = "yes"
+vim.opt.signcolumn = "yes"
 
 -- Decrease update time
 vim.opt.updatetime = 50
@@ -48,7 +49,7 @@ vim.opt.inccommand = "split"
 vim.opt.cursorline = true
 
 -- Minimal number of screen lines to keep above and below the cursor.
-vim.opt.scrolloff = 10
+vim.opt.scrolloff = 8
 
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
@@ -117,6 +118,38 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup(
     {
         {
+            "samwdp/gruvbox.nvim",
+            priority = 1000,
+            config = function()
+                -- Default options:
+                require("gruvbox").setup({
+                    terminal_colors = true, -- add neovim terminal colors
+                    undercurl = true,
+                    underline = true,
+                    bold = true,
+                    italic = {
+                        strings = false,
+                        emphasis = false,
+                        comments = false,
+                        operators = false,
+                        folds = false,
+                    },
+                    strikethrough = true,
+                    invert_selection = false,
+                    invert_signs = false,
+                    invert_tabline = false,
+                    invert_intend_guides = false,
+                    inverse = true, -- invert background for search, diffs, statuslines and errors
+                    contrast = "",  -- can be "hard", "soft" or empty string
+                    palette_overrides = {},
+                    overrides = {},
+                    dim_inactive = false,
+                    transparent_mode = false,
+                })
+                vim.cmd.colorscheme("gruvbox")
+            end,
+        },
+        {
             "ThePrimeagen/harpoon",
             branch = "harpoon2",
             dependencies = { "nvim-lua/plenary.nvim" },
@@ -137,11 +170,53 @@ require("lazy").setup(
                 vim.keymap.set("n", "<C-i>", function() harpoon:list():select(4) end, { desc = "Select Harpoon item 4" })
             end
         },
+
         { "numToStr/Comment.nvim", opts = {} },
         { -- Adds git related signs to the gutter, as well as utilities for managing changes
-            "lewis6991/gitsigns.nvim",
+            'lewis6991/gitsigns.nvim',
             opts = {
-            },
+                signs                             = {
+                    add          = { text = '┃' },
+                    change       = { text = '┃' },
+                    delete       = { text = '_' },
+                    topdelete    = { text = '‾' },
+                    changedelete = { text = '~' },
+                    untracked    = { text = '┆' },
+                },
+                signcolumn                        = true, -- Toggle with `:Gitsigns toggle_signs`
+                numhl                             = false, -- Toggle with `:Gitsigns toggle_numhl`
+                linehl                            = false, -- Toggle with `:Gitsigns toggle_linehl`
+                word_diff                         = true, -- Toggle with `:Gitsigns toggle_word_diff`
+                watch_gitdir                      = {
+                    follow_files = true
+                },
+                auto_attach                       = true,
+                attach_to_untracked               = false,
+                current_line_blame                = false, -- Toggle with `:Gitsigns toggle_current_line_blame`
+                current_line_blame_opts           = {
+                    virt_text = true,
+                    virt_text_pos = 'eol', -- 'eol' | 'overlay' | 'right_align'
+                    delay = 1000,
+                    ignore_whitespace = false,
+                    virt_text_priority = 100,
+                },
+                current_line_blame_formatter      = '<author>, <author_time:%Y-%m-%d> - <summary>',
+                current_line_blame_formatter_opts = {
+                    relative_time = false,
+                },
+                sign_priority                     = 6,
+                update_debounce                   = 100,
+                status_formatter                  = nil, -- Use default
+                max_file_length                   = 40000, -- Disable if file is longer than this (in lines)
+                preview_config                    = {
+                    -- Options passed to nvim_open_win
+                    border = 'single',
+                    style = 'minimal',
+                    relative = 'cursor',
+                    row = 0,
+                    col = 1
+                },
+            }
         },
         {                       -- Useful plugin to show you pending keybinds.
             "folke/which-key.nvim",
@@ -252,7 +327,21 @@ require("lazy").setup(
                 end, { desc = "[S]earch [N]eovim files" })
             end,
         },
-        "github/copilot.vim",
+        -- "github/copilot.vim",
+        {
+            "zbirenbaum/copilot-cmp",
+            dependencies = {
+                "zbirenbaum/copilot.lua",
+            },
+            config = function()
+                require("copilot").setup({
+                    suggestion = { enabled = false },
+                    panel = { enabled = false },
+                })
+                require("copilot_cmp").setup()
+            end
+        },
+
         { -- LSP Configuration & Plugins
             "neovim/nvim-lspconfig",
             dependencies = {
@@ -260,7 +349,7 @@ require("lazy").setup(
                 "williamboman/mason.nvim",
                 "williamboman/mason-lspconfig.nvim",
                 "WhoIsSethDaniel/mason-tool-installer.nvim",
-                "Hoffs/omnisharp-extended-lsp.nvim",
+                -- "Hoffs/omnisharp-extended-lsp.nvim",
 
                 -- Useful status updates for LSP.
                 -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
@@ -300,11 +389,11 @@ require("lazy").setup(
                         end
                         vim.keymap.set("n", "<leader>vca", function() vim.lsp.buf.code_action() end, opts)
 
-                        vim.keymap.set("n", "<leader>gd",
-                            function()
-                                require('omnisharp_extended').telescope_lsp_definition({ jump_type = "vsplit" })
-                            end,
-                            { buffer = event.buf, desc = "[G]oto [D]efinition (decompile)" })
+                        -- vim.keymap.set("n", "<leader>gd",
+                        --     function()
+                        --         require('omnisharp_extended').telescope_lsp_definition({ jump_type = "vsplit" })
+                        --     end,
+                        --     { buffer = event.buf, desc = "[G]oto [D]efinition (decompile)" })
 
                         map("gd", require("telescope.builtin").lsp_definitions, "[G]oto [D]efinition")
                         map("gr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
@@ -412,8 +501,6 @@ require("lazy").setup(
                                     ForImplicitObjectCreation = true,
                                     ForOtherParameters = true,
                                     EnableForTypes = true,
-
-
                                 },
                                 EnableImportCompletion = true,
                                 AnalyzeOpenDocumentsOnly = nil,
@@ -460,6 +547,7 @@ require("lazy").setup(
                 })
             end,
         },
+
         { -- Autocompletion
             "hrsh7th/nvim-cmp",
             event = "InsertEnter",
@@ -540,12 +628,21 @@ require("lazy").setup(
 
                     }),
                     sources = {
-                        { name = "nvim_lsp" },
-                        { name = "luasnip" },
-                        { name = "path" },
+                        { name = "copilot",  group_index = 2 },
+                        { name = "nvim_lsp", group_index = 2 },
+                        { name = "luasnip",  group_index = 2 },
+                        { name = "path",     group_index = 2 },
+                        { name = "buffer",   group_index = 2 },
+                        { name = "cmdline",  group_index = 2 },
                     },
                 })
             end,
+        },
+        {
+            "folke/todo-comments.nvim",
+            event = "VimEnter",
+            dependencies = { "nvim-lua/plenary.nvim" },
+            opts = { signs = false },
         },
         {
             "nvim-lualine/lualine.nvim",
@@ -770,44 +867,6 @@ require("lazy").setup(
                 lualine.setup(config)
             end,
         },
-        {
-            "samwdp/gruvbox.nvim",
-            priority = 1000,
-            config = function()
-                -- Default options:
-                require("gruvbox").setup({
-                    terminal_colors = true, -- add neovim terminal colors
-                    undercurl = true,
-                    underline = true,
-                    bold = true,
-                    italic = {
-                        strings = false,
-                        emphasis = false,
-                        comments = false,
-                        operators = false,
-                        folds = false,
-                    },
-                    strikethrough = true,
-                    invert_selection = false,
-                    invert_signs = false,
-                    invert_tabline = false,
-                    invert_intend_guides = false,
-                    inverse = true, -- invert background for search, diffs, statuslines and errors
-                    contrast = "",  -- can be "hard", "soft" or empty string
-                    palette_overrides = {},
-                    overrides = {},
-                    dim_inactive = false,
-                    transparent_mode = false,
-                })
-                vim.cmd.colorscheme("gruvbox")
-            end,
-        },
-        {
-            "folke/todo-comments.nvim",
-            event = "VimEnter",
-            dependencies = { "nvim-lua/plenary.nvim" },
-            opts = { signs = false },
-        },
 
         {
             "NeogitOrg/neogit",
@@ -916,7 +975,7 @@ require("lazy").setup(
                     -- Window-local options to use for oil buffers
                     win_options = {
                         wrap = false,
-                        signcolumn = "no",
+                        signcolumn = "yes",
                         cursorcolumn = false,
                         foldcolumn = "0",
                         spell = false,
@@ -1078,6 +1137,120 @@ require("lazy").setup(
                 require("focus").setup()
             end
         },
+        {
+            "rcarriga/nvim-dap-ui",
+            dependencies = {
+                "mfussenegger/nvim-dap",
+                "nvim-neotest/nvim-nio",
+                "leoluz/nvim-dap-go"
+            },
+            config = function()
+                require("dapui").setup()
+                require("neodev").setup()
+                require('dap-go').setup()
+
+                local dap, dapui = require("dap"), require("dapui")
+                vim.keymap.set("n", "<leader>tb", dap.toggle_breakpoint, { desc = "[T]oggle [B]reakpoint" })
+                vim.keymap.set("n", "<F5>", dap.continue, { desc = "continue" })
+                vim.keymap.set("n", "<F9>", dap.step_back, { desc = "step back" })
+                vim.keymap.set("n", "<F10>", dap.step_over, { desc = "step over" })
+                vim.keymap.set("n", "<F11>", dap.step_into, { desc = "step into" })
+                dap.listeners.before.launch.dapui_config = function()
+                    vim.g.focus_disable = true
+                    dapui.open()
+                end
+                dap.listeners.before.event_terminated.dapui_config = function()
+                    vim.g.focus_disable = false
+                    dapui.close()
+                end
+                dap.listeners.before.event_exited.dapui_config = function()
+                    vim.g.focus_disable = false
+                    dapui.close()
+                end
+
+                dap.adapters.coreclr = {
+                    type = 'executable',
+                    command = os.getenv("HOME") ..
+                        "/AppData/Local/nvim-data/mason/packages/netcoredbg/netcoredbg/netcoredbg.exe",
+                    args = { '--interpreter=vscode' }
+                }
+                dap.configurations.cs = {
+                    {
+                        type = "coreclr",
+                        name = "launch - netcoredbg",
+                        request = "launch",
+                        program = function()
+                            return vim.fn.input('Path to dll', vim.fn.getcwd() .. '/bin/Debug/', 'file')
+                        end,
+                    },
+                }
+                dap.adapters.chrome = {
+                    type = "executable",
+                    command = "node",
+                    args = { os.getenv("HOME") .. "/AppData/Local/nvim-data/mason/packages/vscode-chrome-debug/out/src/chromeDebug.js" },
+                }
+
+                dap.configurations.javascript = { -- change this to javascript if needed
+                    {
+                        type = "chrome",
+                        request = "attach",
+                        program = "${file}",
+                        cwd = vim.fn.getcwd(),
+                        sourceMaps = true,
+                        protocol = "inspector",
+                        port = 9222,
+                        webRoot = "${workspaceFolder}"
+                    }
+                }
+
+                dap.configurations.typescript = { -- change to typescript if needed
+                    {
+                        type = "chrome",
+                        request = "attach",
+                        program = "${file}",
+                        cwd = vim.fn.getcwd(),
+                        sourceMaps = true,
+                        protocol = "inspector",
+                        port = 4666,
+                        webRoot = "${workspaceFolder}"
+                    }
+                }
+
+                dap.adapters.delve = {
+                    type = 'server',
+                    port = '${port}',
+                    executable = {
+                        command = 'dlv',
+                        args = { 'dap', '-l', '127.0.0.1:${port}' },
+                    }
+                }
+
+                -- https://github.com/go-delve/delve/blob/master/Documentation/usage/dlv_dap.md
+                dap.configurations.go = {
+                    {
+                        type = "delve",
+                        name = "Debug",
+                        request = "launch",
+                        program = "${file}"
+                    },
+                    {
+                        type = "delve",
+                        name = "Debug test", -- configuration for debugging test files
+                        request = "launch",
+                        mode = "test",
+                        program = "${file}"
+                    },
+                    -- works with go.mod packages and sub packages
+                    {
+                        type = "delve",
+                        name = "Debug test (go.mod)",
+                        request = "launch",
+                        mode = "test",
+                        program = "./${relativeFileDirname}"
+                    }
+                }
+            end
+        }
     }, {
         ui = {
             icons = vim.g.have_nerd_font and {} or {
