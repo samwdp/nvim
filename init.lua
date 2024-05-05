@@ -29,7 +29,6 @@ vim.opt.smartcase = true
 
 -- Keep signcolumn on by default
 vim.opt.signcolumn = "yes"
-vim.opt.signcolumn = "yes"
 
 -- Decrease update time
 vim.opt.updatetime = 50
@@ -144,7 +143,7 @@ require("lazy").setup(
                     palette_overrides = {},
                     overrides = {},
                     dim_inactive = false,
-                    transparent_mode = false,
+                    transparent_mode = true,
                 })
                 vim.cmd.colorscheme("gruvbox")
             end,
@@ -183,10 +182,10 @@ require("lazy").setup(
                     changedelete = { text = '~' },
                     untracked    = { text = '┆' },
                 },
-                signcolumn                        = true, -- Toggle with `:Gitsigns toggle_signs`
+                signcolumn                        = true,  -- Toggle with `:Gitsigns toggle_signs`
                 numhl                             = false, -- Toggle with `:Gitsigns toggle_numhl`
                 linehl                            = false, -- Toggle with `:Gitsigns toggle_linehl`
-                word_diff                         = true, -- Toggle with `:Gitsigns toggle_word_diff`
+                word_diff                         = false, -- Toggle with `:Gitsigns toggle_word_diff`
                 watch_gitdir                      = {
                     follow_files = true
                 },
@@ -206,7 +205,7 @@ require("lazy").setup(
                 },
                 sign_priority                     = 6,
                 update_debounce                   = 100,
-                status_formatter                  = nil, -- Use default
+                status_formatter                  = nil,   -- Use default
                 max_file_length                   = 40000, -- Disable if file is longer than this (in lines)
                 preview_config                    = {
                     -- Options passed to nvim_open_win
@@ -259,7 +258,7 @@ require("lazy").setup(
                 -- Useful for getting pretty icons, but requires a Nerd Font.
                 { "nvim-tree/nvim-web-devicons",            enabled = vim.g.have_nerd_font },
             },
-            config = function(_, opts)
+            config = function()
                 local actions = require("telescope.actions")
 
                 require("telescope").setup({
@@ -353,7 +352,25 @@ require("lazy").setup(
 
                 -- Useful status updates for LSP.
                 -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-                { "j-hui/fidget.nvim", opts = {} },
+                {
+                    "j-hui/fidget.nvim",
+                    opts = {
+                        notification = {
+                            window = {
+                                normal_hl = "Comment", -- Base highlight group in the notification window
+                                winblend = 0,          -- Background color opacity in the notification window
+                                border = "none",       -- Border around the notification window
+                                zindex = 45,           -- Stacking priority of the notification window
+                                max_width = 0,         -- Maximum width of the notification window
+                                max_height = 0,        -- Maximum height of the notification window
+                                x_padding = 1,         -- Padding from right edge of window boundary
+                                y_padding = 0,         -- Padding from bottom edge of window boundary
+                                align = "bottom",      -- How to align the notification window
+                                relative = "editor",   -- What the notification window position is relative to
+                            },
+                        },
+                    },
+                },
 
                 -- `neodev` configures Lua LSP for your Neovim config, runtime and plugins
                 -- used for completion, annotations and signatures of Neovim apis
@@ -367,7 +384,7 @@ require("lazy").setup(
                         focusable = false,
                         style = "minimal",
                         border = "rounded",
-                        source = "always",
+                        source = true,
                         header = "",
                         prefix = "",
                     },
@@ -387,7 +404,6 @@ require("lazy").setup(
                         local map = function(keys, func, desc)
                             vim.keymap.set("n", keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
                         end
-                        vim.keymap.set("n", "<leader>vca", function() vim.lsp.buf.code_action() end, opts)
 
                         -- vim.keymap.set("n", "<leader>gd",
                         --     function()
@@ -403,7 +419,6 @@ require("lazy").setup(
                         map("<leader>ds", require("telescope.builtin").lsp_document_symbols, "[D]ocument [S]ymbols")
                         map("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
                         map("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
-                        map("<C-,>", vim.lsp.buf.code_action, "[C]ode [A]ction")
                         map("<leader>f", vim.lsp.buf.format, "[F]ormat Document")
                         map("K", vim.lsp.buf.hover, "Hover Documentation")
                         map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
@@ -576,15 +591,38 @@ require("lazy").setup(
                 "saadparwaiz1/cmp_luasnip",
                 "hrsh7th/cmp-nvim-lsp",
                 "hrsh7th/cmp-path",
+                "hrsh7th/cmp-nvim-lsp-signature-help",
                 "hrsh7th/cmp-buffer",
                 "hrsh7th/cmp-cmdline",
+                "onsails/lspkind.nvim",
             },
             config = function()
                 -- See `:help cmp`
+                -- -- lspkind.lua
+                local lspkind = require("lspkind")
+                lspkind.init({
+                    symbol_map = {
+                        Copilot = "",
+                    },
+                })
+
+                vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = require('gruvbox').palette.yellow })
                 local cmp = require("cmp")
                 local luasnip = require("luasnip")
                 luasnip.config.setup({})
                 cmp.setup({
+                    formatting = {
+                        fields = { "kind", "abbr", "menu" },
+                        format = function(entry, vim_item)
+                            local kind = require("lspkind").cmp_format({ mode = "symbol_text", maxwidth = 50 })(entry,
+                                vim_item)
+                            local strings = vim.split(kind.kind, "%s", { trimempty = true })
+                            kind.kind = " " .. (strings[1] or "") .. " "
+                            kind.menu = "    (" .. (strings[2] or "") .. ")"
+
+                            return kind
+                        end,
+                    },
                     snippet = {
                         expand = function(args)
                             luasnip.lsp_expand(args.body)
@@ -614,6 +652,7 @@ require("lazy").setup(
                         --  Generally you don't need this, because nvim-cmp will display
                         --  completions whenever it has completion options available.
                         ["<C-Space>"] = cmp.mapping.complete({}),
+                        -- ["<C-,>"] = cmp.mapping.code_action(),
 
                         ["<C-l>"] = cmp.mapping(function()
                             if luasnip.expand_or_locally_jumpable() then
@@ -628,12 +667,13 @@ require("lazy").setup(
 
                     }),
                     sources = {
-                        { name = "copilot",  group_index = 2 },
-                        { name = "nvim_lsp", group_index = 2 },
-                        { name = "luasnip",  group_index = 2 },
-                        { name = "path",     group_index = 2 },
-                        { name = "buffer",   group_index = 2 },
-                        { name = "cmdline",  group_index = 2 },
+                        { name = "copilot",                 group_index = 2 },
+                        { name = "nvim_lsp",                group_index = 2 },
+                        { name = "nvim_lsp_signature_help", group_index = 2 },
+                        { name = "luasnip",                 group_index = 2 },
+                        { name = "path",                    group_index = 2 },
+                        { name = "buffer",                  group_index = 2 },
+                        { name = "cmdline",                 group_index = 2 },
                     },
                 })
             end,
@@ -805,7 +845,8 @@ require("lazy").setup(
                     function()
                         local msg = "No Active Lsp"
 
-                        local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
+                        local buf_ft = vim.api.nvim_get_option_value("filetype", { buf = 0 })
+
                         local clients = vim.lsp.get_clients()
                         if next(clients) == nil then
                             return msg
@@ -1039,11 +1080,11 @@ require("lazy").setup(
                         -- Show files and directories that start with "."
                         show_hidden = false,
                         -- This function defines what is considered a "hidden" file
-                        is_hidden_file = function(name, bufnr)
+                        is_hidden_file = function(name)
                             return vim.startswith(name, ".")
                         end,
                         -- This function defines what will never be shown, even when `show_hidden` is set
-                        is_always_hidden = function(name, bufnr)
+                        is_always_hidden = function()
                             return false
                         end,
                         -- Sort file names in a more intuitive order for humans. Is less performant,
@@ -1059,13 +1100,13 @@ require("lazy").setup(
                     -- EXPERIMENTAL support for performing file operations with git
                     git = {
                         -- Return true to automatically git add/mv/rm files
-                        add = function(path)
+                        add = function()
                             return false
                         end,
-                        mv = function(src_path, dest_path)
+                        mv = function()
                             return false
                         end,
-                        rm = function(path)
+                        rm = function()
                             return false
                         end,
                     },
@@ -1147,7 +1188,50 @@ require("lazy").setup(
             config = function()
                 require("dapui").setup()
                 require("neodev").setup()
-                require('dap-go').setup()
+                require('dap-go').setup {
+                    -- Additional dap configurations can be added.
+                    -- dap_configurations accepts a list of tables where each entry
+                    -- represents a dap configuration. For more details do:
+                    -- :help dap-configuration
+                    dap_configurations = {
+                        {
+                            -- Must be "go" or it will be ignored by the plugin
+                            type = "go",
+                            name = "Attach remote",
+                            mode = "remote",
+                            request = "attach",
+                        },
+                    },
+                    -- delve configurations
+                    delve = {
+                        -- the path to the executable dlv which will be used for debugging.
+                        -- by default, this is the "dlv" executable on your PATH.
+                        path = "dlv",
+                        -- time to wait for delve to initialize the debug session.
+                        -- default to 20 seconds
+                        initialize_timeout_sec = 20,
+                        -- a string that defines the port to start delve debugger.
+                        -- default to string "${port}" which instructs nvim-dap
+                        -- to start the process in a random available port
+                        port = "${port}",
+                        -- additional args to pass to dlv
+                        args = {},
+                        -- the build flags that are passed to delve.
+                        -- defaults to empty string, but can be used to provide flags
+                        -- such as "-tags=unit" to make sure the test suite is
+                        -- compiled during debugging, for example.
+                        -- passing build flags using args is ineffective, as those are
+                        -- ignored by delve in dap mode.
+                        build_flags = "",
+                        -- whether the dlv process to be created detached or not. there is
+                        -- an issue on Windows where this needs to be set to false
+                        -- otherwise the dlv server creation will fail.
+                        detached = true,
+                        -- the current working directory to run dlv from, if other than
+                        -- the current working directory.
+                        cwd = nil,
+                    },
+                }
 
                 local dap, dapui = require("dap"), require("dapui")
                 vim.keymap.set("n", "<leader>tb", dap.toggle_breakpoint, { desc = "[T]oggle [B]reakpoint" })
@@ -1192,6 +1276,7 @@ require("lazy").setup(
 
                 dap.configurations.javascript = { -- change this to javascript if needed
                     {
+                        name = "Debug",
                         type = "chrome",
                         request = "attach",
                         program = "${file}",
@@ -1205,6 +1290,7 @@ require("lazy").setup(
 
                 dap.configurations.typescript = { -- change to typescript if needed
                     {
+                        name = "Debug",
                         type = "chrome",
                         request = "attach",
                         program = "${file}",
@@ -1226,29 +1312,6 @@ require("lazy").setup(
                 }
 
                 -- https://github.com/go-delve/delve/blob/master/Documentation/usage/dlv_dap.md
-                dap.configurations.go = {
-                    {
-                        type = "delve",
-                        name = "Debug",
-                        request = "launch",
-                        program = "${file}"
-                    },
-                    {
-                        type = "delve",
-                        name = "Debug test", -- configuration for debugging test files
-                        request = "launch",
-                        mode = "test",
-                        program = "${file}"
-                    },
-                    -- works with go.mod packages and sub packages
-                    {
-                        type = "delve",
-                        name = "Debug test (go.mod)",
-                        request = "launch",
-                        mode = "test",
-                        program = "./${relativeFileDirname}"
-                    }
-                }
             end
         }
     }, {
@@ -1270,3 +1333,5 @@ require("lazy").setup(
             },
         },
     })
+
+vim.opt.signcolumn = "yes"

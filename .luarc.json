@@ -6,5 +6,8 @@
         "before_each",
         "after_each",
         "util"
+    ],
+    "diagnostics.disable": [
+        "undefined-field"
     ]
 }
