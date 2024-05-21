@@ -13,7 +13,6 @@ vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Show diagn
 vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
 vim.keymap.set("n", "<leader>w", vim.cmd.write, { desc = "Write File" })
 vim.keymap.set("n", "<leader>W", ":wq <CR>", { desc = "Write and quit" })
-vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
 vim.keymap.set("n", "<C-h>", ":wincmd h<CR>", { desc = "Window Right" })
 vim.keymap.set("n", "<C-j>", ":wincmd j<CR>", { desc = "Window Down" })
 vim.keymap.set("n", "<C-k>", ":wincmd k<CR>", { desc = "Window Up" })

@@ -77,3 +77,9 @@ cmp.setup({
         { name = "cmdline",                 group_index = 2 },
     },
 })
+cmp.setup.filetype({"sql"}, {
+    sources = {
+        {name = "vim-dadbod-completion"},
+        {name = "buffer"}
+    }
+})

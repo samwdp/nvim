@@ -3,7 +3,8 @@ return {
     dependencies = {
         "mfussenegger/nvim-dap",
         "nvim-neotest/nvim-nio",
-        "leoluz/nvim-dap-go"
+        "leoluz/nvim-dap-go",
+        "theHamsta/nvim-dap-virtual-text"
     },
     config = function()
         require("custom.dap")
