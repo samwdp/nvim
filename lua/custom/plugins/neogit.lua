@@ -12,6 +12,6 @@ return {
         -- init.lua
         local neogit = require('neogit')
         neogit.setup {}
-        vim.keymap.set('n', '<leader>gg', '<cmd>Neogit<cr>')
+        vim.keymap.set('n', '<leader>gg', neogit.open, {})
     end
 }
