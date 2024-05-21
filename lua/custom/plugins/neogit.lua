@@ -1,4 +1,5 @@
 return {
+    {
     "NeogitOrg/neogit",
     dependencies = {
         "nvim-lua/plenary.nvim",      -- required
@@ -14,4 +15,11 @@ return {
         neogit.setup {}
         vim.keymap.set('n', '<leader>gg', neogit.open, {})
     end
+    },
+    {
+        "tpope/vim-fugitive",
+        config = function()
+            vim.keymap.set('n', '<leader>gs', ':Git<CR>', {})
+        end
+    }
 }
