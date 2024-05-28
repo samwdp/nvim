@@ -1,13 +1,6 @@
 -- See `:help cmp`
 -- -- lspkind.lua
-local lspkind = require("lspkind")
-lspkind.init({
-    symbol_map = {
-        Copilot = "",
-    },
-})
 
-vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = require('gruvbox').palette.yellow })
 local cmp = require("cmp")
 local luasnip = require("luasnip")
 luasnip.config.setup({})
@@ -68,18 +61,17 @@ cmp.setup({
 
     }),
     sources = {
-        { name = "copilot",                 group_index = 2 },
-        { name = "nvim_lsp",                group_index = 2 },
-        { name = "nvim_lsp_signature_help", group_index = 2 },
-        { name = "luasnip",                 group_index = 2 },
-        { name = "path",                    group_index = 2 },
-        { name = "buffer",                  group_index = 2 },
-        { name = "cmdline",                 group_index = 2 },
+        { name = "nvim_lsp" },
+        { name = "nvim_lsp_signature_help" },
+        { name = "luasnip" },
+        { name = "path" },
+        { name = "buffer" },
+        { name = "cmdline" },
     },
 })
-cmp.setup.filetype({"sql"}, {
+cmp.setup.filetype({ "sql" }, {
     sources = {
-        {name = "vim-dadbod-completion"},
-        {name = "buffer"}
+        { name = "vim-dadbod-completion" },
+        { name = "buffer" }
     }
 })
