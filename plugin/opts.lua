@@ -1,6 +1,13 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
+vim.api.nvim_create_autocmd("BufEnter", {
+  callback = function()
+    vim.opt.formatoptions:remove { "c", "r", "o" }
+  end,
+  group = general,
+  desc = "Disable New Line Comment",
+})
 -- Set to true if you have a Nerd Font installed
 vim.g.have_nerd_font = true
 

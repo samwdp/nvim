@@ -1,5 +1,15 @@
 -- See `:help cmp`
 -- -- lspkind.lua
+local lspkind = require("lspkind")
+lspkind.init({
+    symbol_map = {
+        Tabnine = "⌬",
+        TabNine = "⌬",
+        Codeium = ""
+    },
+})
+
+vim.api.nvim_set_hl(0, "CmpItemKindCodeium", { fg = require('gruvbox').palette.yellow })
 
 local cmp = require("cmp")
 local luasnip = require("luasnip")
@@ -61,6 +71,7 @@ cmp.setup({
 
     }),
     sources = {
+        { name = "codeium" },
         { name = "nvim_lsp" },
         { name = "nvim_lsp_signature_help" },
         { name = "luasnip" },
