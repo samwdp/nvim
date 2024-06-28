@@ -6,6 +6,8 @@ return {
     },
     event = 'BufEnter',
     config = function()
-        require("codeium").setup({})
+        require("codeium").setup({
+            enable_chat = true,
+        })
     end
 }

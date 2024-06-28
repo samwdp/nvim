@@ -181,10 +181,3 @@ require("mason-lspconfig").setup({
         end,
     },
 })
-
-require("roslyn").setup({
-    dotnet_cmd = "dotnet",              -- this is the default
-    roslyn_version = "4.8.0-3.23475.7", -- this is the default
-    on_attach = function(client, bufnr) end,
-    capabilities = capabilities
-})

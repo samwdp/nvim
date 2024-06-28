@@ -18,7 +18,7 @@ vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
-vim.wo.wrap = true
+vim.opt.wrap = false
 vim.opt.conceallevel = 1
 -- Don't show the mode, since it's already in the status line
 vim.opt.showmode = false
@@ -58,6 +58,7 @@ vim.opt.cursorline = true
 
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 8
+vim.opt.sidescroll = 8
 
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
@@ -65,6 +66,7 @@ vim.opt.scrolloff = 8
 -- Set highlight on search, but clear on pressing <Esc> in normal mode
 vim.opt.hlsearch = true
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
+vim.keymap.set("n", "-", "<cmd>Oil<CR>")
 vim.keymap.set("n", "<leader>pv", function()
     require("oil").toggle_float()
 end)
