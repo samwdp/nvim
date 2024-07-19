@@ -69,7 +69,7 @@ vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 vim.keymap.set("n", "-", "<cmd>Oil<CR>")
 vim.keymap.set("n", "<leader>pv", function()
     require("oil").toggle_float()
-end)
+end, {desc = "[P]roject"})
 -- greatest remap ever
 
 vim.api.nvim_create_autocmd("TextYankPost", {
