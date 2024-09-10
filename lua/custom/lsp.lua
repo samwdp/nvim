@@ -87,7 +87,7 @@ local servers = {
             },
         },
     },
-    tsserver = {
+    ts_ls = {
         settings = {
             typescript = {
                 inlayHints = {
