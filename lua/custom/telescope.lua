@@ -9,7 +9,38 @@ require("telescope").setup({
         color_devicons = true,
     },
     pickers = {
+        oldfiles = {
+            theme = "ivy"
+        },
+        resume = {
+            theme = "ivy"
+        },
+        diagnostics = {
+            theme = "ivy"
+        },
+        live_grep = {
+            theme = "ivy"
+        },
+        grep_string = {
+            theme = "ivy"
+        },
+        find_files = {
+            theme = "ivy"
+        },
+        keymaps = {
+            theme = "ivy"
+        },
+        help_tags = {
+            theme = "ivy"
+        },
+        git_files = {
+            theme = "ivy"
+        },
+        commands = {
+            theme = "ivy"
+        },
         buffers = {
+            theme = "ivy",
             mappings = {
                 i = {
                     ["<c-d>"] = actions.delete_buffer + actions.move_to_top,
@@ -19,7 +50,7 @@ require("telescope").setup({
     },
     extensions = {
         ["ui-select"] = {
-            require("telescope.themes").get_dropdown(),
+            require("telescope.themes").get_ivy(),
         },
     },
 })
