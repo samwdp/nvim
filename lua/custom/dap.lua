@@ -2,7 +2,7 @@ local dap, dapui = require("dap"), require("dapui")
 require("dapui").setup()
 require("neodev").setup()
 require('dap-go').setup()
-require("nvim-dap-virtual-text").setup()
+require("nvim-dap-virtual-text").setup({})
 require("custom.dap.netcordbg")
 require("custom.dap.chrome")
 
@@ -31,6 +31,3 @@ dap.listeners.before.event_exited.dapui_config = function()
     vim.g.focus_disable = false
     dapui.close()
 end
-
-
--- https://github.com/go-delve/delve/blob/master/Documentation/usage/dlv_dap.md
