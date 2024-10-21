@@ -1,7 +1,7 @@
 return {
     "ej-shafran/compile-mode.nvim",
     -- you can just use the latest version:
-    branch = "nightly",
+    -- branch = "nightly",
     -- or the most up-to-date updates:
     -- branch = "nightly",
     dependencies = {
@@ -18,6 +18,9 @@ return {
             -- to add ANSI escape code support, add:
             baleia_setup = true,
         }
+
+        vim.keymap.set("n", "<leader>cc", ":Compile<cr>", { desc = "[C]ode [C]ompile" })
+        vim.keymap.set("n", "<leader>cC", ":Recompile<cr>", { desc = "[C]ode [R]ecompile" })
     end
 }
 
