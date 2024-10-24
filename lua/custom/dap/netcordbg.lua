@@ -5,6 +5,8 @@ dap.adapters.coreclr = {
         "/Local/nvim-data/mason/packages/netcoredbg/netcoredbg/netcoredbg.exe",
     args = { '--interpreter=vscode' }
 }
+
+
 dap.configurations.cs = {
     {
         type = "coreclr",

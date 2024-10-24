@@ -82,7 +82,12 @@ return {
     },
     {
         'stevearc/dressing.nvim',
-        opts = {}
+        opts = {
+            input = {
+                relative = "editor",
+                title_pos = "center",
+            },
+        },
     },
     {
         "nvim-focus/focus.nvim",

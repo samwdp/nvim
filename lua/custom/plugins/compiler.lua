@@ -20,7 +20,9 @@ return {
         }
 
         vim.keymap.set("n", "<leader>cc", ":Compile<cr>", { desc = "[C]ode [C]ompile" })
+        vim.keymap.set("n", "<F2>", ":Compile<cr>", { desc = "[C]ode [C]ompile" })
         vim.keymap.set("n", "<leader>cC", ":Recompile<cr>", { desc = "[C]ode [R]ecompile" })
+        vim.keymap.set("n", "<F3>", ":Recompile<cr>", { desc = "[C]ode [R]ecompile" })
     end
 }
 
