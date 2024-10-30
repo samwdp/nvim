@@ -36,7 +36,7 @@ return {
                 Directory = { link = "GruvboxBlueBold" },
                 Constant = { link = "GruvboxAqua" },
                 Special = { link = "GruvboxPurple" },
-                ContextVt = {link = "GruvboxGray"}
+                ContextVt = {link = "GruvboxFg3"}
             },
             dim_inactive = false,
             transparent_mode = true,
