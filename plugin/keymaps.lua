@@ -24,6 +24,8 @@ vim.keymap.set("n", "<leader>db", ":<C-U>bprevious <bar> bdelete #<CR>", { desc 
 vim.keymap.set("n", "<leader>dw", ":wincmd q<CR>", { desc = "[D]elete [W]indow" })
 vim.keymap.set("n", "<leader>n", ":cnext <CR>", { desc = "cnext" })
 vim.keymap.set("n", "<leader>p", ":cprev <CR>", { desc = "cprev" })
+vim.keymap.set("n", "]]", ":cnext <CR>", { desc = "cnext" })
+vim.keymap.set("n", "[[", ":cprev <CR>", { desc = "cprev" })
 
 vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 vim.keymap.set("n", "<C-d>", "<C-d>zz")

@@ -53,6 +53,44 @@ return {
             ---@diagnostic disable-next-line: missing-fields
             require('nvim-treesitter.configs').setup({
                 textobjects = {
+                    move = {
+                        enable = true,
+                        set_jumps = true,
+                        goto_next_start = {
+                            ["]p"] = "@parameter.inner",
+                            ["]m"] = "@function.outer",
+                            ["]o"] = "@loop.*",
+                            ["]s"] = { query = "@local.scope", query_group = "locals", desc = "Next scope" },
+                            ["]z"] = { query = "@fold", query_group = "folds", desc = "Next fold" },
+                        },
+                        goto_next_end = {
+                            ["]M"] = "@function.outer",
+                            ["]["] = "@class.outer",
+                        },
+                        goto_previous_start = {
+                            ["[m"] = "@function.outer",
+                        },
+                        goto_previous_end = {
+                            ["[M"] = "@function.outer",
+                            ["[]"] = "@class.outer",
+                        },
+                        goto_next = {
+                            ["]d"] = "@conditional.outer",
+                        },
+                        goto_previous = {
+                            ["[p"] = "@parameter.inner",
+                            ["[d"] = "@conditional.outer",
+                        },
+                    },
+                    swap = {
+                        enable = true,
+                        swap_next = {
+                            ["<leader>a"] = "@parameter.inner",
+                        },
+                        swap_previous = {
+                            ["<leader>A"] = "@parameter.inner",
+                        },
+                    },
                     select = {
                         include_surrounding_whitespace = true,
                         enable = true,
