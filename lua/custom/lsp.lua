@@ -24,19 +24,11 @@ vim.api.nvim_create_autocmd("LspAttach", {
             vim.keymap.set("n", keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
         end
 
-        map("gd", require("telescope.builtin").lsp_definitions, "[G]oto [D]efinition")
-        map("gr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
-        map("gi", require("telescope.builtin").lsp_implementations, "[G]oto [I]mplementation")
-        map("<leader>D", require("telescope.builtin").lsp_type_definitions, "Type [D]efinition")
-        map("gt", require("telescope.builtin").lsp_type_definitions, "Type [D]efinition")
-        map("<leader>ds", require("telescope.builtin").lsp_document_symbols, "[D]ocument [S]ymbols")
         map("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
         map("<leader>cr", vim.lsp.buf.rename, "[C]ode [R]ename")
 
         map("<leader>f", vim.lsp.buf.format, "[F]ormat Document")
         map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
-        map("<leader>ss", require("telescope.builtin").lsp_document_symbols, "[S]earch [S]ymobls")
-        map("<leader>sS", require("telescope.builtin").lsp_workspace_symbols, "[S]earch [S]ymobls")
 
         if vim.lsp.inlay_hint then
             vim.keymap.set("n", "<leader>ih", function()
@@ -144,7 +136,22 @@ local servers = {
                 IncludePrereleases = true,
             },
         },
+        on_init = function(client, _)
+            client.server_capabilities.semanticTokensProvider = nil
+        end,
+        handlers = {
+            ["textDocument/definition"] = require('omnisharp_extended').definition_handler,
+            ["textDocument/typeDefinition"] = require('omnisharp_extended').type_definition_handler,
+            ["textDocument/references"] = require('omnisharp_extended').references_handler,
+            ["textDocument/implementation"] = require('omnisharp_extended').implementation_handler,
+        },
     },
+    -- csharp_ls = {
+    --     handlers = {
+    --         ["textDocument/definition"] = function() require('csharpls_extended').handler() end,
+    --         ["textDocument/typeDefinition"] = function() require('csharpls_extended').handler() end,
+    --     },
+    -- },
     lua_ls = {
         settings = {
             Lua = {

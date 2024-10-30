@@ -6,8 +6,8 @@ return {
             "williamboman/mason.nvim",
             "williamboman/mason-lspconfig.nvim",
             "WhoIsSethDaniel/mason-tool-installer.nvim",
+            "Decodetalkers/csharpls-extended-lsp.nvim",
             "Hoffs/omnisharp-extended-lsp.nvim",
-            "jmederosalvarado/roslyn.nvim",
 
             -- Useful status updates for LSP.
             -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`

@@ -98,3 +98,18 @@ end, { desc = "[S]earch [/] in Open Files" })
 vim.keymap.set("n", "<leader>sn", function()
     builtin.find_files({ cwd = vim.fn.stdpath("config") })
 end, { desc = "[S]earch [N]eovim files" })
+
+vim.keymap.set("n", "gd", function() require("telescope.builtin").lsp_definitions() end, { desc = "[G]oto [D]efinition" })
+vim.keymap.set("n", "gr", function() require("telescope.builtin").lsp_references() end, { desc = "[G]oto [R]eferences" })
+vim.keymap.set("n", "gi", function() require("telescope.builtin").lsp_implementations() end,
+    { desc = "[G]oto [I]mplementation" })
+vim.keymap.set("n", "<leader>D", function() require("telescope.builtin").lsp_type_definitions() end,
+    { desc = "Type [D]efinition" })
+vim.keymap.set("n", "gt", function() require("telescope.builtin").lsp_type_definitions() end,
+    { desc = "Type [D]efinition" })
+vim.keymap.set("n", "<leader>ds", function() require("telescope.builtin").lsp_document_symbols() end,
+    { desc = "[D]ocument [S]ymbols" })
+vim.keymap.set("n", "<leader>ss", function() require("telescope.builtin").lsp_document_symbols() end,
+    { desc = "[S]earch [S]ymobls" })
+vim.keymap.set("n", "<leader>sS", function() require("telescope.builtin").lsp_workspace_symbols() end,
+    { desc = "[S]earch [S]ymobls" })
