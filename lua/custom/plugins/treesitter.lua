@@ -3,7 +3,7 @@ return {
         "nvim-treesitter/nvim-treesitter",
         build = ":TSUpdate",
         opts = {
-            ensure_installed = { "c", "html", "lua", "markdown" },
+            ensure_installed = { "c", "html", "lua", "markdown", "odin", "c_sharp" },
             -- Autoinstall languages that are not installed
             auto_install = true,
             highlight = {

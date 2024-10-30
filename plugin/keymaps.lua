@@ -19,8 +19,11 @@ vim.keymap.set("n", "<C-j>", ":wincmd j<CR>", { desc = "Window Down" })
 vim.keymap.set("n", "<C-k>", ":wincmd k<CR>", { desc = "Window Up" })
 vim.keymap.set("n", "<C-l>", ":wincmd l<CR>", { desc = "Window Left" })
 vim.keymap.set("n", "<leader>vs", ":vs<CR>", { desc = "[V]ertical [S]plit" })
-vim.keymap.set("n", "<leader>db", vim.cmd.bdelete, { desc = "[D]elete [B]uffer" })
+-- vim.keymap.set("n", "<leader>db", vim.cmd.bdelete, { desc = "[D]elete [B]uffer" })
+vim.keymap.set("n", "<leader>db", ":<C-U>bprevious <bar> bdelete #<CR>", { desc = "[D]elete [B]uffer" })
 vim.keymap.set("n", "<leader>dw", ":wincmd q<CR>", { desc = "[D]elete [W]indow" })
+vim.keymap.set("n", "<leader>n", ":cnext <CR>", { desc = "cnext" })
+vim.keymap.set("n", "<leader>p", ":cprev <CR>", { desc = "cprev" })
 
 vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
@@ -36,3 +39,4 @@ vim.keymap.set("n", "<C-h>", "<C-w><C-h>", { desc = "Move focus to the left wind
 vim.keymap.set("n", "<C-l>", "<C-w><C-l>", { desc = "Move focus to the right window" })
 vim.keymap.set("n", "<C-j>", "<C-w><C-j>", { desc = "Move focus to the lower window" })
 vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
+-- TODO: TEST

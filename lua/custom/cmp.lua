@@ -1,5 +1,6 @@
 -- See `:help cmp`
 -- -- lspkind.lua
+-- TODO: test 2
 local lspkind = require("lspkind")
 lspkind.init({
     symbol_map = {
