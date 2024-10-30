@@ -24,7 +24,7 @@ return {
             contrast = "",  -- can be "hard", "soft" or empty string
             palette_overrides = {},
             overrides = {
-                Comment = { fg = "#b8bb26" },
+                Comment = { link = "GruvboxGreen" },
                 Statement = { link = "GruvboxRedBold" },
                 Conditional = { link = "GruvboxYellowBold" },
                 Repeat = { link = "GruvboxYellowBold" },
@@ -36,7 +36,7 @@ return {
                 Directory = { link = "GruvboxBlueBold" },
                 Constant = { link = "GruvboxAqua" },
                 Special = { link = "GruvboxPurple" },
-
+                ContextVt = {link = "GruvboxGray"}
             },
             dim_inactive = false,
             transparent_mode = true,
