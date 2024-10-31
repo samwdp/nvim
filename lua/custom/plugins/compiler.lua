@@ -1,9 +1,5 @@
 return {
-    "ej-shafran/compile-mode.nvim",
-    -- you can just use the latest version:
-    -- branch = "nightly",
-    -- or the most up-to-date updates:
-    -- branch = "nightly",
+    "samwdp/compile-mode.nvim",
     dependencies = {
         "nvim-lua/plenary.nvim",
         -- if you want to enable coloring of ANSI escape codes in
@@ -14,9 +10,9 @@ return {
 
         ---@type CompileModeOpts
         vim.g.compile_mode = {
-            buffer_name="compilation",
             -- to add ANSI escape code support, add:
             baleia_setup = true,
+            disable_swap = true,
         }
 
         vim.keymap.set("n", "<leader>cc", ":Compile<cr>", { desc = "[C]ode [C]ompile" })

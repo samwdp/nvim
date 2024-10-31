@@ -21,6 +21,7 @@ vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 vim.opt.wrap = false
 vim.opt.conceallevel = 1
+-- vim.opt.swapfile = false
 -- Don't show the mode, since it's already in the status line
 vim.opt.showmode = false
 
