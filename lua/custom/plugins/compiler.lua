@@ -1,6 +1,7 @@
 return {
     "samwdp/compile-mode.nvim",
     dependencies = {
+        'stevearc/dressing.nvim',
         "nvim-lua/plenary.nvim",
         -- if you want to enable coloring of ANSI escape codes in
         -- compilation output, add:

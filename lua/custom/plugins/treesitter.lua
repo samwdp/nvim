@@ -56,28 +56,28 @@ return {
                     move = {
                         enable = true,
                         set_jumps = true,
-                        goto_next_start = {
+                        -- goto_next_start = {
+                        -- },
+                        -- goto_next_end = {
+                        -- },
+                        -- goto_previous_start = {
+                        -- },
+                        -- goto_previous_end = {
+                        -- },
+                        goto_next = {
                             ["]p"] = "@parameter.inner",
                             ["]m"] = "@function.outer",
+                            ["]["] = "@class.outer",
                             ["]o"] = "@loop.*",
                             ["]s"] = { query = "@local.scope", query_group = "locals", desc = "Next scope" },
-                            ["]z"] = { query = "@fold", query_group = "folds", desc = "Next fold" },
-                        },
-                        goto_next_end = {
-                            ["]M"] = "@function.outer",
-                            ["]["] = "@class.outer",
-                        },
-                        goto_previous_start = {
-                            ["[m"] = "@function.outer",
-                        },
-                        goto_previous_end = {
-                            ["[M"] = "@function.outer",
-                            ["[]"] = "@class.outer",
-                        },
-                        goto_next = {
                             ["]d"] = "@conditional.outer",
                         },
                         goto_previous = {
+                            ["[m"] = "@function.outer",
+                            ["[o"] = "@loop.*",
+                            ["[s"] = { query = "@local.scope", query_group = "locals", desc = "Prev scope" },
+                            ["[M"] = "@function.outer",
+                            ["[]"] = "@class.outer",
                             ["[p"] = "@parameter.inner",
                             ["[d"] = "@conditional.outer",
                         },
