@@ -65,6 +65,9 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
 
 local servers = {
+    html = {
+        filetypes = { "html", "templ", "cshtml", "razor" }
+    },
     ols = {},
     gopls = {
         settings = {
@@ -106,52 +109,6 @@ local servers = {
             },
         },
     },
-    omnisharp = {
-        settings = {
-            FormattingOptions = {
-                EnableEditorConfigSupport = true,
-                OrganizeImports = true,
-            },
-            MsBuild = {
-                LoadProjectsOnDemand = nil,
-            },
-            RoslynExtensionsOptions = {
-                EnableAnalyzersSupport = true,
-                EnableDecompilationSupport = true,
-                InlayHintOptions = {
-                    EnableForParameters = true,
-                    ForLiteralParameters = true,
-                    ForIndexerParameters = true,
-                    ForOjbectCreationParameters = true,
-                    ForLambdaParameterTypes = true,
-                    ForImplicitVariableTypes = true,
-                    ForImplicitObjectCreation = true,
-                    ForOtherParameters = true,
-                    EnableForTypes = true,
-                },
-                EnableImportCompletion = true,
-                AnalyzeOpenDocumentsOnly = nil,
-            },
-            Sdk = {
-                IncludePrereleases = true,
-            },
-        },
-        on_init = function(client, _)
-            client.server_capabilities.semanticTokensProvider = nil
-        end,
-        handlers = {
-            ["textDocument/definition"] = require('omnisharp_extended').definition_handler,
-            ["textDocument/typeDefinition"] = require('omnisharp_extended').type_definition_handler,
-            ["textDocument/references"] = require('omnisharp_extended').references_handler,
-            ["textDocument/implementation"] = require('omnisharp_extended').implementation_handler,
-        },
-    },
-    -- csharp_ls = {
-    --     handlers = {
-    --         ["textDocument/definition"] = function() require('csharpls_extended').handler() end,
-    --         ["textDocument/typeDefinition"] = function() require('csharpls_extended').handler() end,
-    --     },
-    -- },
     lua_ls = {
         settings = {
             Lua = {
@@ -164,9 +121,13 @@ local servers = {
             },
         },
     },
+    rust_analyzer = {
+    },
 }
 
+
 require("mason").setup({
+    registries = { "github:mason-org/mason-registry", 'github:crashdummyy/mason-registry', },
     ui = {
         border = "rounded",
     },
