@@ -4,9 +4,11 @@ return {
         dependencies = {
             "tris203/rzls.nvim",
         },
-        ft = "cs",
         config = function()
             require("rzls").setup({})
+            -- local capabilities = vim.lsp.protocol.make_client_capabilities()
+            -- -- capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
+            local capabilities = require('blink.cmp').get_lsp_capabilities()
             require("roslyn").setup({
                 filewatching = true,
                 args = {
@@ -31,6 +33,7 @@ return {
                     ),
                 },
                 config = {
+                    capabilities = capabilities,
                     handlers = require 'rzls.roslyn_handlers',
                     settings = {
                         ["csharp|inlay_hints"] = {

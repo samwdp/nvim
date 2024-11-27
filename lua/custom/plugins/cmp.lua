@@ -1,37 +1,63 @@
-return {         -- Autocompletion
-    "hrsh7th/nvim-cmp",
-    event = "InsertEnter",
-    dependencies = {
-        -- Snippet Engine & its associated nvim-cmp source
-        {
-            "L3MON4D3/LuaSnip",
-            build = (function()
-                if vim.fn.has("win32") == 1 or vim.fn.executable("make") == 0 then
-                    return
-                end
-                return "make install_jsregexp"
-            end)(),
-            dependencies = {
-                -- `friendly-snippets` contains a variety of premade snippets.
-                --    See the README about individual language/framework/plugin snippets:
-                --    https://github.com/rafamadriz/friendly-snippets
-                -- {
-                --   'rafamadriz/friendly-snippets',
-                --   config = function()
-                --     require('luasnip.loaders.from_vscode').lazy_load()
-                --   end,
-                -- },
-            },
+return { -- Autocompletion
+    {
+        'saghen/blink.compat',
+        version = '*',
+        opts = {
+            impersonate_nvim_cmp = true,
+            enable_events = false,
         },
-        "saadparwaiz1/cmp_luasnip",
-        "hrsh7th/cmp-nvim-lsp",
-        "hrsh7th/cmp-path",
-        "hrsh7th/cmp-nvim-lsp-signature-help",
-        "hrsh7th/cmp-buffer",
-        "hrsh7th/cmp-cmdline",
-        "onsails/lspkind.nvim",
     },
-    config = function()
-        require("custom.cmp")
-    end,
+    {
+        'saghen/blink.cmp',
+        lazy = false, -- lazy loading handled internally
+        dependencies = {
+            'rafamadriz/friendly-snippets',
+            "epwalsh/obsidian.nvim",
+        },
+        -- use a release tag to download pre-built binaries
+        version = 'v0.*',
+
+        ---@module 'blink.cmp'
+        ---@type blink.cmp.Config
+        opts = {
+            keymap = { preset = 'default' },
+
+            highlight = {
+                use_nvim_cmp_as_default = true,
+            },
+            nerd_font_variant = 'mono',
+            sources = {
+                completion = {
+                    enabled_providers = { 'lsp', 'path', 'snippets', 'buffer',
+                        'dadbod',
+                        },
+                },
+                providers = {
+                    dadbod = { name = "Dadbod", module = "vim_dadbod_completion.blink" },
+                }
+            },
+            windows = {
+                autocomplete = {
+                    border = 'rounded',
+                    draw = {
+                        columns = { { "kind_icon" }, { "label", "label_description", gap = 1 }, { "kind" } },
+                    },
+                },
+                documentation = {
+                    border = 'rounded',
+                    auto_show = true,
+                    direction_priority = {
+                        autocomplete_north = { 'e', 'w' },
+                        autocomplete_south = { 'e', 'w' },
+                    },
+                },
+                signature_help = {
+                    border = 'rounded',
+                },
+            },
+
+            trigger = { signature_help = { enabled = true } }
+        },
+        opts_extend = { "sources.completion.enabled_providers" }
+    },
 }

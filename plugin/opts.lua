@@ -1,6 +1,7 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 vim.opt.directory = "c:\\Users\\sam\\.local\\share\\nvim\\swap"
+vim.api.nvim_create_autocmd({"BufNewFile", "BufRead"},{ pattern = {"*.xaml"}, command = "setf xml" })
 
 vim.api.nvim_create_autocmd("BufEnter", {
   callback = function()

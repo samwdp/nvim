@@ -27,7 +27,6 @@ vim.keymap.set("n", "<leader>n", ":cnext <CR>", { desc = "cnext" })
 vim.keymap.set("n", "<leader>p", ":cprev <CR>", { desc = "cprev" })
 vim.keymap.set("n", "]]", ":cnext <CR>", { desc = "cnext" })
 vim.keymap.set("n", "[[", ":cprev <CR>", { desc = "cprev" })
-
 vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")

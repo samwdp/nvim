@@ -1,4 +1,21 @@
 return {
+    {
+        "ray-x/lsp_signature.nvim",
+        event = "InsertEnter",
+        opts = {
+            hint_prefix = {
+                above = "↙ ", -- when the hint is on the line above the current line
+                current = "← ", -- when the hint is on the same line
+                below = "↖ " -- when the hint is on the line below the current line
+            },
+            -- hint_prefix = "🐼 ",
+            bind = true,
+            handler_opts = {
+                border = "rounded"
+            }
+        },
+        config = function(_, opts) require 'lsp_signature'.setup(opts) end
+    },
     { -- LSP Configuration & Plugins
         "neovim/nvim-lspconfig",
         dependencies = {
@@ -8,6 +25,8 @@ return {
             "WhoIsSethDaniel/mason-tool-installer.nvim",
             "Decodetalkers/csharpls-extended-lsp.nvim",
             "Hoffs/omnisharp-extended-lsp.nvim",
+            "seblj/roslyn.nvim",
+            "tris203/rzls.nvim",
 
             -- Useful status updates for LSP.
             -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`

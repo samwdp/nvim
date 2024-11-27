@@ -61,12 +61,13 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end,
 })
 
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
+-- local capabilities = vim.lsp.protocol.make_client_capabilities()
+local capabilities = require('blink.cmp').get_lsp_capabilities()
+
 
 local servers = {
     html = {
-        filetypes = { "html", "templ", "cshtml", "razor" }
+        filetypes = { "html", "templ" }
     },
     ols = {},
     gopls = {
@@ -121,8 +122,9 @@ local servers = {
             },
         },
     },
-    rust_analyzer = {
-    },
+    rust_analyzer = {},
+    sqlls = {},
+    angularls = {},
 }
 
 
@@ -135,9 +137,10 @@ require("mason").setup({
 local ensure_installed = vim.tbl_keys(servers or {})
 vim.list_extend(ensure_installed, {
     "stylua", -- Used to format Lua code
+    "roslyn", -- Used to format Lua code
+    "rzls",   -- Used to format Lua code
 })
 require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
-
 require("mason-lspconfig").setup({
     handlers = {
         function(server_name)
