@@ -30,3 +30,5 @@ require("lazy").setup({ import = "custom/plugins" }, {
     },
     change_detection = { notify = false }
 })
+
+print(vim.inspect(vim.g.compiler_state))

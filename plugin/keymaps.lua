@@ -3,8 +3,10 @@ vim.keymap.set("x", "<leader>p", [["_dP]])
 -- next greatest remap ever : asbjornHaland
 vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
 vim.keymap.set("n", "<leader>Y", [["+Y]])
-vim.keymap.set("n", "<leader>cw", [["_yiw:s/\(\%#\w\+\)\(\W\+\)\(\w\+\)/\3\2\1/<CR><c-o><c-l>]], {desc = "Change word right"})
-vim.keymap.set("n", "<leader>cW", [["_yiw?\w\+\_W\+\%#<CR>:s/\(\%#\w\+\)\(\_W\+\)\(\w\+\)/\3\2\1/<CR><c-o><c-l>]], {desc = "Change word right"})
+vim.keymap.set("n", "<leader>cw", [["_yiw:s/\(\%#\w\+\)\(\W\+\)\(\w\+\)/\3\2\1/<CR><c-o><c-l>]],
+    { desc = "Change word right" })
+vim.keymap.set("n", "<leader>cW", [["_yiw?\w\+\_W\+\%#<CR>:s/\(\%#\w\+\)\(\_W\+\)\(\w\+\)/\3\2\1/<CR><c-o><c-l>]],
+    { desc = "Change word right" })
 
 
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
@@ -41,6 +43,10 @@ vim.keymap.set("n", "<C-h>", "<C-w><C-h>", { desc = "Move focus to the left wind
 vim.keymap.set("n", "<C-l>", "<C-w><C-l>", { desc = "Move focus to the right window" })
 vim.keymap.set("n", "<C-j>", "<C-w><C-j>", { desc = "Move focus to the lower window" })
 vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
-vim.keymap.set("n", "<leader>rc", function() vim.ui.input({ prompt = 'Enter command: '}, function(input) vim.api.nvim_command(":! " .. input) end) end, {desc = "[R]un [C]ommand"})
+vim.keymap.set("n", "<leader>rc", function()
+    vim.ui.input({ prompt = 'Enter command: ' },
+        function(input)
+            vim.api.nvim_command(":! " .. input)
+        end)
+end, { desc = "[R]un [C]ommand" })
 -- TODO: TEST
-

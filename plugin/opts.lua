@@ -2,6 +2,7 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 vim.opt.directory = "c:\\Users\\sam\\.local\\share\\nvim\\swap"
 vim.api.nvim_create_autocmd({"BufNewFile", "BufRead"},{ pattern = {"*.xaml"}, command = "setf xml" })
+vim.g.compiler_state = false;
 
 vim.api.nvim_create_autocmd("BufEnter", {
   callback = function()
@@ -21,7 +22,7 @@ vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 vim.opt.wrap = false
-vim.opt.conceallevel = 1
+vim.opt.conceallevel = 2
 -- vim.opt.swapfile = false
 -- Don't show the mode, since it's already in the status line
 vim.opt.showmode = false

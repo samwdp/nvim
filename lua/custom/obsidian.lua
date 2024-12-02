@@ -3,17 +3,16 @@ require("obsidian").setup({
         {
             name = "personal",
             path = "~/Documents/Obsidian/personal",
-            overrides = {
-                notes_subdir = "personal/notes",
-            },
+            strict = true,
         },
         {
             name = "work",
             path = "~/Documents/Obsidian/work",
-            overrides = {
-                notes_subdir = "work/notes",
-            },
+            strict = true,
         },
+    },
+    daily_notes = {
+        folder = "dailies",
     },
     completion = {
         -- Set to false to disable completion.
@@ -23,9 +22,17 @@ require("obsidian").setup({
     },
     mappings = {
         -- Overrides the 'gf' mapping to work on markdown/wiki links within your vault.
-        ["<learer> on"] = {
+        ["<leader>on"] = {
             action = function()
-                return require("obsidian").util.new()
+                vim.api.nvim_command(":ObsidianNew ")
+                -- vim.ui.input({ prompt = "New File (no file extension): " }, function(input)
+                --     vim.api.nvim_command(":ObsidianNew " .. input .. ".md")
+                -- end)
+            end,
+        },
+        ["<leader>os"] = {
+            action = function()
+                vim.api.nvim_command(":ObsidianSearch")
             end,
         },
         ["gf"] = {

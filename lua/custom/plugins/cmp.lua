@@ -12,7 +12,7 @@ return { -- Autocompletion
         lazy = false, -- lazy loading handled internally
         dependencies = {
             'rafamadriz/friendly-snippets',
-            "epwalsh/obsidian.nvim",
+            'kristijanhusak/vim-dadbod-completion'
         },
         -- use a release tag to download pre-built binaries
         version = 'v0.*',
@@ -30,7 +30,7 @@ return { -- Autocompletion
                 completion = {
                     enabled_providers = { 'lsp', 'path', 'snippets', 'buffer',
                         'dadbod',
-                        },
+                    },
                 },
                 providers = {
                     dadbod = { name = "Dadbod", module = "vim_dadbod_completion.blink" },

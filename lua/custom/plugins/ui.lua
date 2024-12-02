@@ -81,13 +81,16 @@ return {
         "HiPhish/rainbow-delimiters.nvim",
     },
     {
-        'stevearc/dressing.nvim',
+        "folke/noice.nvim",
+        event = "VeryLazy",
         opts = {
-            input = {
-                relative = "editor",
-                title_pos = "center",
+            notify = {
+                enabled = false,
             },
         },
+        dependencies = {
+            "MunifTanjim/nui.nvim",
+        }
     },
     {
         "nvim-focus/focus.nvim",
