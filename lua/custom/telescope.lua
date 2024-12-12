@@ -10,38 +10,37 @@ require("telescope").setup({
         color_devicons = true,
     },
     pickers = {
-        -- oldfiles = {
-        --     theme = "ivy"
-        -- },
-        -- resume = {
-        --     theme = "ivy"
-        -- },
-        -- diagnostics = {
-        --     theme = "ivy"
-        -- },
-        -- live_grep = {
-        --     theme = "ivy"
-        -- },
-        -- grep_string = {
-        --     theme = "ivy"
-        -- },
-        -- find_files = {
-        --     theme = "ivy"
-        -- },
-        -- keymaps = {
-        --     theme = "ivy"
-        -- },
-        -- help_tags = {
-        --     theme = "ivy"
-        -- },
-        -- git_files = {
-        --     theme = "ivy"
-        -- },
-        -- commands = {
-        --     theme = "ivy"
-        -- },
+        oldfiles = {
+            theme = "ivy"
+        },
+        resume = {
+            theme = "ivy"
+        },
+        diagnostics = {
+            theme = "dropdown"
+        },
+        live_grep = {
+            theme = "dropdown"
+        },
+        grep_string = {
+            theme = "ivy"
+        },
+        find_files = {
+            theme = "ivy"
+        },
+        keymaps = {
+            theme = "ivy"
+        },
+        help_tags = {
+            theme = "ivy"
+        },
+        git_files = {
+            theme = "ivy"
+        },
+        commands = {
+            theme = "ivy"
+        },
         buffers = {
-            -- theme = "ivy",
             mappings = {
                 i = {
                     ["<c-d>"] = actions.delete_buffer + actions.move_to_top,
@@ -55,10 +54,9 @@ require("telescope").setup({
             override_generic_sorter = true, -- override the generic sorter
             override_file_sorter = true,    -- override the file sorter
             case_mode = "smart_case",       -- or "ignore_case" or "respect_case"
-            -- the default case_mode is "smart_case"
         },
         ["ui-select"] = {
-            require("telescope.themes").get_ivy(),
+            require("telescope.themes").get_dropdown(),
         },
     },
 })

@@ -70,10 +70,6 @@ vim.opt.sidescroll = 8
 -- Set highlight on search, but clear on pressing <Esc> in normal mode
 vim.opt.hlsearch = true
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
-vim.keymap.set("n", "-", "<cmd>Oil<CR>")
-vim.keymap.set("n", "<leader>pv", function()
-    require("oil").toggle_float()
-end, {desc = "[P]roject"})
 -- greatest remap ever
 
 vim.api.nvim_create_autocmd("TextYankPost", {

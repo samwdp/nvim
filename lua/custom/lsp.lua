@@ -9,9 +9,6 @@ vim.diagnostic.config({
         prefix = "",
     },
 })
-vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-    border = "rounded",
-})
 vim.api.nvim_create_autocmd("LspAttach", {
     group = vim.api.nvim_create_augroup("kickstart-lsp-attach", { clear = true }),
     callback = function(event)
@@ -36,11 +33,11 @@ vim.api.nvim_create_autocmd("LspAttach", {
             end, { buffer = event.buf, desc = "Toggle [I]nlay [H]int" })
         end
 
-        vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-            vim.lsp.diagnostic.on_publish_diagnostics, {
-                virtual_text = false
-            }
-        )
+        -- vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+        --     vim.lsp.diagnostic.on_publish_diagnostics, {
+        --         virtual_text = false
+        --     }
+        -- )
 
         local client = vim.lsp.get_client_by_id(event.data.client_id)
         if client and client.server_capabilities.inlayHintProvider then
@@ -124,7 +121,6 @@ local servers = {
     },
     rust_analyzer = {},
     sqlls = {},
-    angularls = {},
 }
 
 

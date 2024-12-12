@@ -17,46 +17,55 @@ return { -- Autocompletion
         -- use a release tag to download pre-built binaries
         version = 'v0.*',
 
+        --[[
         ---@module 'blink.cmp'
         ---@type blink.cmp.Config
+            ]] --
         opts = {
             keymap = { preset = 'default' },
-
-            highlight = {
-                use_nvim_cmp_as_default = true,
-            },
-            nerd_font_variant = 'mono',
-            sources = {
-                completion = {
-                    enabled_providers = { 'lsp', 'path', 'snippets', 'buffer',
-                        'dadbod',
-                    },
-                },
-                providers = {
-                    dadbod = { name = "Dadbod", module = "vim_dadbod_completion.blink" },
-                }
-            },
-            windows = {
-                autocomplete = {
+            completion = {
+                menu = {
                     border = 'rounded',
                     draw = {
-                        columns = { { "kind_icon" }, { "label", "label_description", gap = 1 }, { "kind" } },
+                        align_to_component = 'label', -- or 'none' to disable
+                        padding = 1,
+                        gap = 1,
+                        columns = { { 'kind_icon' }, { 'label', 'label_description', gap = 1 }, { 'kind' } },
                     },
                 },
                 documentation = {
-                    border = 'rounded',
                     auto_show = true,
-                    direction_priority = {
-                        autocomplete_north = { 'e', 'w' },
-                        autocomplete_south = { 'e', 'w' },
+                    treesitter_highlighting = true,
+                    window = {
+                        border = 'rounded',
+                        direction_priority = {
+                            menu_north = { 'e', 'w' },
+                            menu_south = { 'e', 'w' },
+                        },
                     },
                 },
-                signature_help = {
-                    border = 'rounded',
+                -- Displays a preview of the selected item on the current line
+                ghost_text = {
+                    enabled = false,
                 },
             },
 
-            trigger = { signature_help = { enabled = true } }
+            signature = {
+                enabled = false,
+                window = {
+                    border = 'rounded',
+                    direction_priority = { 'n', 's' },
+                },
+            },
+
+            sources = {
+                completion = {
+                    enabled_providers = { 'lsp', 'path', 'snippets', 'buffer', 'dadbod' },
+                },
+                providers = {
+                    dadbod = { name = "Dadbod", module = "vim_dadbod_completion.blink" },
+                },
+            },
         },
         opts_extend = { "sources.completion.enabled_providers" }
     },
