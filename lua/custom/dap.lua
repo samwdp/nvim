@@ -1,6 +1,5 @@
 local dap, dapui = require("dap"), require("dapui")
 require("dapui").setup()
-require("neodev").setup()
 require('dap-go').setup()
 require("nvim-dap-virtual-text").setup({})
 require("custom.dap.netcordbg")

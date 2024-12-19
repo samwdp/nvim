@@ -74,8 +74,7 @@ vim.keymap.set("n", "<leader>.", builtin.find_files, { desc = "[S]earch [F]iles"
 vim.keymap.set("n", "<C-p>", builtin.git_files, { desc = "[S]earch [F]iles" })
 vim.keymap.set("n", "<leader>sw", builtin.grep_string, { desc = "[S]earch current [W]ord" })
 vim.keymap.set("n", "<leader>sg", builtin.live_grep, { desc = "[S]earch by [G]rep" })
-vim.keymap.set("n", "<leader>st",
-    function() builtin.grep_string({ shorten_path = true, word_match = "-w", only_sort_text = true, search = 'TODO:' }) end,
+vim.keymap.set("n", "<leader>st", ":TodoTelescope<CR>",
     { desc = "[S]earch [T]odo" })
 vim.keymap.set("n", "<leader>sd", builtin.diagnostics, { desc = "[S]earch [D]iagnostics" })
 vim.keymap.set("n", "<leader>sr", builtin.resume, { desc = "[S]earch [R]esume" })

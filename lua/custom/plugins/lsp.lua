@@ -1,21 +1,4 @@
 return {
-    {
-        "ray-x/lsp_signature.nvim",
-        event = "InsertEnter",
-        opts = {
-            hint_prefix = {
-                above = "↙ ", -- when the hint is on the line above the current line
-                current = "← ", -- when the hint is on the same line
-                below = "↖ " -- when the hint is on the line below the current line
-            },
-            -- hint_prefix = "🐼 ",
-            bind = true,
-            handler_opts = {
-                border = "rounded"
-            }
-        },
-        config = function(_, opts) require 'lsp_signature'.setup(opts) end
-    },
     { -- LSP Configuration & Plugins
         "neovim/nvim-lspconfig",
         dependencies = {
@@ -23,11 +6,9 @@ return {
             "williamboman/mason.nvim",
             "williamboman/mason-lspconfig.nvim",
             "WhoIsSethDaniel/mason-tool-installer.nvim",
-            "Decodetalkers/csharpls-extended-lsp.nvim",
-            "Hoffs/omnisharp-extended-lsp.nvim",
             "seblj/roslyn.nvim",
             "tris203/rzls.nvim",
-
+            "saghen/blink.cmp",
             -- Useful status updates for LSP.
             -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
             {
@@ -49,10 +30,17 @@ return {
                     },
                 },
             },
-
-            -- `neodev` configures Lua LSP for your Neovim config, runtime and plugins
-            -- used for completion, annotations and signatures of Neovim apis
-            { "folke/neodev.nvim", opts = {} },
+            {
+                "folke/lazydev.nvim",
+                ft = "lua", -- only load on lua files
+                opts = {
+                    library = {
+                        -- See the configuration section for more details
+                        -- Load luvit types when the `vim.uv` word is found
+                        { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+                    },
+                },
+            },
         },
         opts = { inlay_hints = { enabled = true } },
         config = function()

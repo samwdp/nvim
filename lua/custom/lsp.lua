@@ -1,14 +1,3 @@
-vim.diagnostic.config({
-    -- update_in_insert = true,
-    float = {
-        focusable = false,
-        style = "minimal",
-        border = "rounded",
-        source = true,
-        header = "",
-        prefix = "",
-    },
-})
 vim.api.nvim_create_autocmd("LspAttach", {
     group = vim.api.nvim_create_augroup("kickstart-lsp-attach", { clear = true }),
     callback = function(event)
@@ -23,6 +12,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
         map("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
         map("<leader>cr", vim.lsp.buf.rename, "[C]ode [R]ename")
+        map("<leader>cs", vim.lsp.buf.signature_help, "[C]ode [S]ignatures")
+        map("S", vim.lsp.buf.signature_help, "[C]ode [S]ignatures")
 
         map("<leader>f", vim.lsp.buf.format, "[F]ormat Document")
         map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
@@ -32,12 +23,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
                 vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
             end, { buffer = event.buf, desc = "Toggle [I]nlay [H]int" })
         end
-
-        -- vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-        --     vim.lsp.diagnostic.on_publish_diagnostics, {
-        --         virtual_text = false
-        --     }
-        -- )
 
         local client = vim.lsp.get_client_by_id(event.data.client_id)
         if client and client.server_capabilities.inlayHintProvider then
@@ -60,7 +45,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 -- local capabilities = vim.lsp.protocol.make_client_capabilities()
 local capabilities = require('blink.cmp').get_lsp_capabilities()
-
 
 local servers = {
     html = {

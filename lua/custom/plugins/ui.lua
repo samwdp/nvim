@@ -69,7 +69,11 @@ return {
         "folke/todo-comments.nvim",
         event = "VimEnter",
         dependencies = { "nvim-lua/plenary.nvim" },
-        opts = { signs = true },
+        opts = {
+            signs = true,
+            search = { pattern = [[\b(KEYWORDS)(\([^\)]*\))?:]] },
+            highlight = { pattern = [[.*<((KEYWORDS)%(\(.{-1,}\))?):]] },
+        },
     },
     {
         "norcalli/nvim-colorizer.lua",
@@ -84,6 +88,11 @@ return {
         "folke/noice.nvim",
         event = "VeryLazy",
         opts = {
+            lsp = {
+                signature = {
+                    auto_open = { enabled = false }
+                },
+            },
             presets = {
                 lsp_doc_border = true,
             },
