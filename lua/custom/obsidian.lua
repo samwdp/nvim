@@ -15,13 +15,10 @@ require("obsidian").setup({
         folder = "dailies",
     },
     completion = {
-        -- Set to false to disable completion.
-        nvim_cmp = false,
-        -- Trigger completion at 2 chars.
-        min_chars = 2,
+        nvim_cmp = flase,
+        min_chars = 1,
     },
     mappings = {
-        -- Overrides the 'gf' mapping to work on markdown/wiki links within your vault.
         ["<leader>on"] = {
             action = function()
                 vim.api.nvim_command(":ObsidianNew ")
@@ -41,14 +38,12 @@ require("obsidian").setup({
             end,
             opts = { noremap = false, expr = true, buffer = true },
         },
-        -- Toggle check-boxes.
         ["<leader>ch"] = {
             action = function()
                 return require("obsidian").util.toggle_checkbox()
             end,
             opts = { buffer = true },
         },
-        -- Smart action depending on context, either follow link or toggle checkbox.
         ["<cr>"] = {
             action = function()
                 return require("obsidian").util.smart_action()

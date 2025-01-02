@@ -1,17 +1,17 @@
 return { -- Autocompletion
     {
-        'saghen/blink.compat',
-        version = '*',
-        opts = {
-            impersonate_nvim_cmp = true,
-            enable_events = false,
-        },
-    },
-    {
         'saghen/blink.cmp',
         dependencies = {
             'rafamadriz/friendly-snippets',
             'kristijanhusak/vim-dadbod-completion',
+            {
+                'saghen/blink.compat',
+                version = '*',
+                opts = {
+                    impersonate_nvim_cmp = true,
+                    enable_events = false,
+                },
+            },
         },
 
         version = '*',
@@ -44,11 +44,24 @@ return { -- Autocompletion
                 window = { border = 'rounded' }
             },
             sources = {
-                default = { 'lsp', 'path', 'snippets', 'buffer', 'lazydev', 'dadbod' },
+                default = { 'lsp', 'path', 'snippets', 'buffer', 'lazydev', 'dadbod',
+                    'obsidian', 'obsidian_tags', 'obsidian_new' },
                 providers = {
                     lsp = { fallbacks = { "lazydev" } },
                     lazydev = { name = "LazyDev", module = "lazydev.integrations.blink" },
                     dadbod = { name = "Dadbod", module = "vim_dadbod_completion.blink" },
+                    obsidian = {
+                        name = "obsidian",
+                        module = "blink.compat.source",
+                    },
+                    obsidian_new = {
+                        name = "obsidian_new",
+                        module = "blink.compat.source",
+                    },
+                    obsidian_tags = {
+                        name = "obsidian_tags",
+                        module = "blink.compat.source",
+                    },
                 },
             },
         },
