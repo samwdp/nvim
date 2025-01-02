@@ -8,8 +8,6 @@ vim.keymap.set("n", "<leader>cw", [["_yiw:s/\(\%#\w\+\)\(\W\+\)\(\w\+\)/\3\2\1/<
 vim.keymap.set("n", "<leader>cW", [["_yiw?\w\+\_W\+\%#<CR>:s/\(\%#\w\+\)\(\_W\+\)\(\w\+\)/\3\2\1/<CR><c-o><c-l>]],
     { desc = "Change word right" })
 
-
--- vim.keymap.set("n", "<leader>f", vim.lsp.buf.format, { desc = "[F]ormat Document" })
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 -- Diagnostic keymaps
@@ -24,8 +22,12 @@ vim.keymap.set("n", "<leader>dw", ":wincmd q<CR>", { desc = "[D]elete [W]indow" 
 -- vim.keymap.set("n", "<C-h>", ":wincmd h<CR>", { desc = "[D]elete [W]indow" })
 -- vim.keymap.set("n", "<C-l>", ":wincmd l<CR>", { desc = "[D]elete [W]indow" })
 -- vim.keymap.set("n", "<C-k>", ":wincmd k<CR>", { desc = "[D]elete [W]indow" })
-vim.keymap.set("n", "<leader>n", ":cnext <CR>", { desc = "cnext" })
-vim.keymap.set("n", "<leader>p", ":cprev <CR>", { desc = "cprev" })
+vim.keymap.set("n", "n", "nzzzv")
+vim.keymap.set("n", "N", "Nzzzv")
+vim.keymap.set("n", "<C-d>", "<C-d>zz")
+vim.keymap.set("n", "<C-u>", "<C-u>zz")
+vim.keymap.set("n", "<leader>n", "<cmd>cnext<CR>zz", { desc = "cnext" })
+vim.keymap.set("n", "<leader>p", "<cmd>cprev<CR>zz", { desc = "cprev" })
 vim.keymap.set("n", "<leader>gs", function()
     require("neogit").open({ kind = "split" })
 end, { desc = "[G]it [S]tatus" })

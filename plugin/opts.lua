@@ -10,6 +10,15 @@ vim.api.nvim_create_autocmd("BufEnter", {
     desc = "Disable New Line Comment",
 })
 
+-- turn on spelling for certain file types
+vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
+    pattern = { "*.md", "*.txt", "*.org", "*.csv" },
+    callback = function()
+        vim.opt.spell = true
+        vim.opt.spelllang = "en_gb"
+    end
+})
+
 -- Set to true if you have a Nerd Font installed
 vim.g.have_nerd_font = true
 vim.o.shell = "nu"
@@ -78,3 +87,5 @@ vim.api.nvim_create_autocmd("TextYankPost", {
         vim.highlight.on_yank()
     end,
 })
+
+-- vim.opt.spelllang = 'en_gb'

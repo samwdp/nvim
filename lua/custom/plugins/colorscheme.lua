@@ -10,9 +10,9 @@ return {
             bold = true,
             italic = {
                 strings = false,
-                emphasis = false,
-                comments = false,
-                operators = false,
+                emphasis = true,
+                comments = true,
+                operators = true,
                 folds = false,
             },
             strikethrough = true,
@@ -21,7 +21,6 @@ return {
             invert_tabline = false,
             invert_intend_guides = false,
             inverse = false, -- invert background for search, diffs, statuslines and errors
-            contrast = "",  -- can be "hard", "soft" or empty string
             palette_overrides = {},
             overrides = {
                 Comment = { link = "GruvboxGreenBold" },

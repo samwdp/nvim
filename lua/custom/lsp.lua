@@ -62,7 +62,7 @@ local capabilities = require('blink.cmp').get_lsp_capabilities()
 
 local servers = {
     html = {
-        filetypes = { "html", "templ" }
+        filetypes = { "cshtml", "razor", "html", "templ", "htmlangular" }
     },
     ols = {},
     gopls = {

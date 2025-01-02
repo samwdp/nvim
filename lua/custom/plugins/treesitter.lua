@@ -69,13 +69,11 @@ return {
                             ["]m"] = "@function.outer",
                             ["]["] = "@class.outer",
                             ["]o"] = "@loop.*",
-                            ["]s"] = { query = "@local.scope", query_group = "locals", desc = "Next scope" },
                             ["]d"] = "@conditional.outer",
                         },
                         goto_previous = {
                             ["[m"] = "@function.outer",
                             ["[o"] = "@loop.*",
-                            ["[s"] = { query = "@local.scope", query_group = "locals", desc = "Prev scope" },
                             ["[M"] = "@function.outer",
                             ["[]"] = "@class.outer",
                             ["[p"] = "@parameter.inner",

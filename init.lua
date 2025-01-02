@@ -11,8 +11,7 @@ if not vim.loop.fs_stat(lazypath) then
     vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
 end ---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
---test
---this is another test
+
 require("lazy").setup({ import = "custom/plugins" }, {
     ui = {
         icons = vim.g.have_nerd_font and {} or {
