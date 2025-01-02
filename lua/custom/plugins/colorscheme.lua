@@ -40,6 +40,7 @@ return {
                 ContextVt = { link = "GruvboxFg3" },
                 BlinkCmpMenu = { link = "GruvboxBg1" },
                 BlinkCmpMenuBorder = { link = "GruvboxFg0" },
+                FlashBackdrop = { link = "GruvboxBg1" },
                 -- BlinkCmpKind = { link = "GruvboxGreenBold" },
                 -- BlinkCmpLabelDeprecated = { link = "GruvboxRedBold" },
                 -- BlinkCmpLabelMatch = { link = "GruvboxAquaBold" },

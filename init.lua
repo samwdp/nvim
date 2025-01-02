@@ -1,5 +1,8 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
+vim.keymap.set("n", "<space><space>x", "<cmd>source %<CR>")
+vim.keymap.set("n", "<space>x", ":.lua<CR>")
+vim.keymap.set("v", "<space>x", ":lua<CR>")
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -8,7 +11,8 @@ if not vim.loop.fs_stat(lazypath) then
     vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
 end ---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
-
+--test
+--this is another test
 require("lazy").setup({ import = "custom/plugins" }, {
     ui = {
         icons = vim.g.have_nerd_font and {} or {
@@ -27,5 +31,5 @@ require("lazy").setup({ import = "custom/plugins" }, {
             lazy = "💤 ",
         },
     },
-    change_detection = { notify = false }
+    change_detection = { notify = false, enabled = false, }
 })

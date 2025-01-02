@@ -18,6 +18,20 @@ vim.api.nvim_create_autocmd("LspAttach", {
         map("<leader>f", vim.lsp.buf.format, "[F]ormat Document")
         map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
 
+        vim.diagnostic.config({
+            signs = {
+                text = {
+                    [vim.diagnostic.severity.ERROR] = "",
+                    [vim.diagnostic.severity.WARN] = "",
+                    [vim.diagnostic.severity.HINT] = "",
+                    [vim.diagnostic.severity.INFO] = ""
+                }
+            },
+            virtual_text = {
+                severity = "ERROR"
+            },
+        })
+
         if vim.lsp.inlay_hint then
             vim.keymap.set("n", "<leader>ih", function()
                 vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())

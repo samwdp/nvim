@@ -1,34 +1,22 @@
 local dap = require("dap")
-dap.adapters.chrome = {
-    type = "executable",
-    command = "node",
-    args = { os.getenv("UserAppData") .. "/Local/nvim-data/mason/packages/vscode-chrome-debug/out/src/chromeDebug.js" },
+
+dap.adapters.firefox = {
+    type = 'executable',
+    command = 'node',
+    args = { os.getenv("UserAppData") .. "/Local/nvim-data/mason/bin/firefox-debug-adapter.cmd" },
 }
 
-dap.configurations.javascript = { -- change this to javascript if needed
+dap.configurations.typescript = {
     {
-        name = "Debug",
-        type = "chrome",
-        request = "attach",
-        program = "${file}",
-        cwd = vim.fn.getcwd(),
-        sourceMaps = true,
-        protocol = "inspector",
-        port = 9222,
-        webRoot = "${workspaceFolder}"
-    }
-}
-
-dap.configurations.typescript = { -- change to typescript if needed
-    {
-        name = "Debug",
-        type = "chrome",
-        request = "attach",
-        program = "${file}",
-        cwd = vim.fn.getcwd(),
-        sourceMaps = true,
-        protocol = "inspector",
-        port = 4666,
-        webRoot = "${workspaceFolder}"
+        name = 'Debug with Firefox',
+        type = 'firefox',
+        request = 'launch',
+        reAttach = true,
+        url = function()
+            return vim.fn.input('Path to executable: ', 'http://localhost:' .. vim.fn.getcwd())
+        end,
+        -- url = 'http://localhost:3000',
+        webRoot = '${workspaceFolder}',
+        firefoxExecutable = "C:/Program Files/Zen Twilight/zen.exe"
     }
 }

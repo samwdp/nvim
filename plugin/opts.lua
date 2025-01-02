@@ -1,19 +1,18 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
-vim.opt.directory = "c:\\Users\\sam\\.local\\share\\nvim\\swap"
-vim.api.nvim_create_autocmd({"BufNewFile", "BufRead"},{ pattern = {"*.xaml"}, command = "setf xml" })
+vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, { pattern = { "*.xaml" }, command = "setf xml" })
 vim.g.compiler_state = false;
 
 vim.api.nvim_create_autocmd("BufEnter", {
-  callback = function()
-    vim.opt.formatoptions:remove { "c", "r", "o" }
-  end,
-  group = general,
-  desc = "Disable New Line Comment",
+    callback = function()
+        vim.opt.formatoptions:remove { "c", "r", "o" }
+    end,
+    desc = "Disable New Line Comment",
 })
+
 -- Set to true if you have a Nerd Font installed
 vim.g.have_nerd_font = true
-
+vim.o.shell = "nu"
 -- Make line numbers default
 vim.opt.number = true
 vim.opt.relativenumber = true
@@ -31,7 +30,7 @@ vim.opt.showmode = false
 vim.opt.breakindent = true
 
 -- Set the amount of columns for column line
-vim.opt.colorcolumn = "80"
+vim.opt.colorcolumn = "120"
 
 -- Save undo history
 vim.opt.undofile = true
