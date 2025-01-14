@@ -15,7 +15,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
         map("<leader>cs", vim.lsp.buf.signature_help, "[C]ode [S]ignatures")
         map("S", vim.lsp.buf.signature_help, "[C]ode [S]ignatures")
 
-        map("<leader>f", vim.lsp.buf.format, "[F]ormat Document")
         map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
 
         vim.diagnostic.config({
@@ -23,12 +22,12 @@ vim.api.nvim_create_autocmd("LspAttach", {
                 text = {
                     [vim.diagnostic.severity.ERROR] = "",
                     [vim.diagnostic.severity.WARN] = "",
-                    [vim.diagnostic.severity.HINT] = "",
+                    [vim.diagnostic.severity.HINT] = "󰠠",
                     [vim.diagnostic.severity.INFO] = ""
                 }
             },
             virtual_text = {
-                severity = "ERROR"
+                severity = "WARN"
             },
         })
 
@@ -57,12 +56,11 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end,
 })
 
--- local capabilities = vim.lsp.protocol.make_client_capabilities()
 local capabilities = require('blink.cmp').get_lsp_capabilities()
 
 local servers = {
     html = {
-        filetypes = { "cshtml", "razor", "html", "templ", "htmlangular" }
+        filetypes = { "razor", "html", "templ", "htmlangular" }
     },
     ols = {},
     gopls = {
@@ -95,7 +93,6 @@ local servers = {
                     includeInlayParameterNameHints = "all", -- 'none' | 'literals' | 'all'
                     includeInlayParameterNameHintsWhenArgumentMatchesName = true,
                     includeInlayVariableTypeHints = true,
-
                     includeInlayFunctionParameterTypeHints = true,
                     includeInlayVariableTypeHintsWhenTypeMatchesName = true,
                     includeInlayPropertyDeclarationTypeHints = true,
@@ -130,9 +127,13 @@ require("mason").setup({
 })
 local ensure_installed = vim.tbl_keys(servers or {})
 vim.list_extend(ensure_installed, {
-    "stylua", -- Used to format Lua code
-    "roslyn", -- Used to format Lua code
-    "rzls",   -- Used to format Lua code
+    "stylua",
+    "markdownlint-cli2",
+    "netcoredbg",
+    "firefox-debug-adapter",
+    "prettier",
+    "roslyn",
+    "rzls"
 })
 require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 require("mason-lspconfig").setup({

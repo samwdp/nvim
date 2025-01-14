@@ -3,7 +3,7 @@ require("dapui").setup()
 require('dap-go').setup()
 require("nvim-dap-virtual-text").setup({})
 require("custom.dap.netcordbg")
-require("custom.dap.chrome")
+require("custom.dap.web")
 require("custom.dap.gdb")
 
 vim.keymap.set("n", "<leader>tb", dap.toggle_breakpoint, { desc = "[T]oggle [B]reakpoint" })

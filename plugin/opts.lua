@@ -21,7 +21,7 @@ vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
 
 -- Set to true if you have a Nerd Font installed
 vim.g.have_nerd_font = true
-vim.o.shell = "nu"
+vim.o.shell = "nu.exe"
 -- Make line numbers default
 vim.opt.number = true
 vim.opt.relativenumber = true
@@ -87,5 +87,3 @@ vim.api.nvim_create_autocmd("TextYankPost", {
         vim.highlight.on_yank()
     end,
 })
-
--- vim.opt.spelllang = 'en_gb'

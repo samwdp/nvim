@@ -2,46 +2,7 @@ return {
     { -- Adds git related signs to the gutter, as well as utilities for managing changes
         'lewis6991/gitsigns.nvim',
         config = function()
-            require('gitsigns').setup {
-                signs                        = {
-                    add          = { text = '┃' },
-                    change       = { text = '┃' },
-                    delete       = { text = '_' },
-                    topdelete    = { text = '‾' },
-                    changedelete = { text = '~' },
-                    untracked    = { text = '┆' },
-                },
-                signcolumn                   = true,  -- Toggle with `:Gitsigns toggle_signs`
-                numhl                        = false, -- Toggle with `:Gitsigns toggle_numhl`
-                linehl                       = false, -- Toggle with `:Gitsigns toggle_linehl`
-                word_diff                    = false, -- Toggle with `:Gitsigns toggle_word_diff`
-                watch_gitdir                 = {
-                    follow_files = true
-                },
-                auto_attach                  = true,
-                attach_to_untracked          = false,
-                current_line_blame           = false, -- Toggle with `:Gitsigns toggle_current_line_blame`
-                current_line_blame_opts      = {
-                    virt_text = true,
-                    virt_text_pos = 'eol', -- 'eol' | 'overlay' | 'right_align'
-                    delay = 1000,
-                    ignore_whitespace = false,
-                    virt_text_priority = 100,
-                },
-                current_line_blame_formatter = '<author>, <author_time:%R> - <summary>',
-                sign_priority                = 6,
-                update_debounce              = 100,
-                status_formatter             = nil,   -- Use default
-                max_file_length              = 40000, -- Disable if file is longer than this (in lines)
-                preview_config               = {
-                    -- Options passed to nvim_open_win
-                    border = 'single',
-                    style = 'minimal',
-                    relative = 'cursor',
-                    row = 0,
-                    col = 1
-                },
-            }
+            require('gitsigns').setup()
         end,
     },
     {                       -- Useful plugin to show you pending keybinds.
@@ -113,18 +74,18 @@ return {
     {
         "nvim-telescope/telescope-ui-select.nvim"
     },
-    {
-        "folke/flash.nvim",
-        event = "VeryLazy",
-        ---@type Flash.Config
-        opts = {},
-        -- stylua: ignore
-        keys = {
-            { "s",     mode = { "n", "x", "o" }, function() require("flash").jump() end,              desc = "Flash" },
-            { "<leader>sf",     mode = { "n", "x", "o" }, function() require("flash").treesitter() end,        desc = "Flash Treesitter" },
-            { "r",     mode = "o",               function() require("flash").remote() end,            desc = "Remote Flash" },
-            { "R",     mode = { "o", "x" },      function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
-            { "<c-s>", mode = { "c" },           function() require("flash").toggle() end,            desc = "Toggle Flash Search" },
-        },
-    },
+    -- {
+    --     "folke/flash.nvim",
+    --     event = "VeryLazy",
+    --     ---@type Flash.Config
+    --     opts = {},
+    --     -- stylua: ignore
+    --     keys = {
+    --         { "s",          mode = { "n", "x", "o" }, function() require("flash").jump() end,              desc = "Flash" },
+    --         { "<leader>sf", mode = { "n", "x", "o" }, function() require("flash").treesitter() end,        desc = "Flash Treesitter" },
+    --         { "r",          mode = "o",               function() require("flash").remote() end,            desc = "Remote Flash" },
+    --         { "R",          mode = { "o", "x" },      function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
+    --         { "<c-s>",      mode = { "c" },           function() require("flash").toggle() end,            desc = "Toggle Flash Search" },
+    --     },
+    -- },
 }

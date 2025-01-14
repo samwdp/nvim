@@ -27,7 +27,12 @@ return { -- Autocompletion
             },
 
             completion = {
-                menu = { border = 'rounded' },
+                menu = {
+                    border = 'rounded',
+                    draw = {
+                        columns = { { 'kind_icon' }, { 'label', 'label_description', gap = 1 }, { 'kind' } },
+                    }
+                },
                 documentation = {
                     auto_show = true,
                     window = {
@@ -62,6 +67,10 @@ return { -- Autocompletion
                         name = "obsidian_tags",
                         module = "blink.compat.source",
                     },
+                    supermaven = {
+                        name = "supermaven",
+                        module = "blink.compat.source",
+                    }
                 },
             },
         },

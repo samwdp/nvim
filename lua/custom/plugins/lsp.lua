@@ -1,4 +1,42 @@
 return {
+    {
+        "mfussenegger/nvim-lint",
+        event = { "BufReadPre", "BufNewFile" },
+        config = function()
+            local lint = require("lint")
+            lint.linters_by_ft = {
+                markdown = { "markdownlint-cli2" }
+            }
+
+            local lint_group = vim.api.nvim_create_augroup("lint", { clear = true })
+            vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
+                group = lint_group,
+                callback = function()
+                    lint.try_lint()
+                end
+            })
+        end,
+    },
+    {
+        "stevearc/conform.nvim",
+        opts = {
+            formatters_by_ft = {
+                markdown = { "prettier" }
+            },
+        },
+        keys = { {
+            "<leader>f",
+            mode = "n",
+            function()
+                require("conform").format({
+                    lsp_fallback = true,
+                    async = false,
+                    timeout_ms = 500
+                })
+            end,
+            desc = "[F]ormat"
+        } }
+    },
     { -- LSP Configuration & Plugins
         "neovim/nvim-lspconfig",
         dependencies = {

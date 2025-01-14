@@ -46,9 +46,10 @@ vim.keymap.set("n", "<C-h>", "<C-w><C-h>", { desc = "Move focus to the left wind
 vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the right window" })
 vim.keymap.set("n", "<C-l>", "<C-w><C-l>", { desc = "Move focus to the right window" })
 vim.keymap.set("n", "<leader>rc", function()
-    vim.ui.input({ prompt = 'Enter command: ' },
+    vim.ui.input({
+            prompt = 'Enter command: '
+        },
         function(input)
             vim.api.nvim_command(":! " .. input)
         end)
 end, { desc = "[R]un [C]ommand" })
--- TODO(samwdp): TEST

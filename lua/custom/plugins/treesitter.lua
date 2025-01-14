@@ -3,7 +3,8 @@ return {
         "nvim-treesitter/nvim-treesitter",
         build = ":TSUpdate",
         opts = {
-            ensure_installed = { "c", "html", "lua", "markdown", "odin", "c_sharp" },
+            ensure_installed = { "zig", "typescript", "html", "javascript",
+                "c", "html", "lua", "markdown", "odin", "c_sharp" },
             -- Autoinstall languages that are not installed
             auto_install = true,
             highlight = {
@@ -65,19 +66,18 @@ return {
                         -- goto_previous_end = {
                         -- },
                         goto_next = {
+                            ["]c"] = "@class.outer",
+                            ["]f"] = "@function.outer",
+                            ["]i"] = "@conditional.outer",
+                            ["]l"] = "@loop.*",
                             ["]p"] = "@parameter.inner",
-                            ["]m"] = "@function.outer",
-                            ["]["] = "@class.outer",
-                            ["]o"] = "@loop.*",
-                            ["]d"] = "@conditional.outer",
                         },
                         goto_previous = {
-                            ["[m"] = "@function.outer",
-                            ["[o"] = "@loop.*",
-                            ["[M"] = "@function.outer",
-                            ["[]"] = "@class.outer",
+                            ["[c"] = "@class.outer",
+                            ["[f"] = "@function.outer",
+                            ["[i"] = "@conditional.outer",
+                            ["[l"] = "@loop.*",
                             ["[p"] = "@parameter.inner",
-                            ["[d"] = "@conditional.outer",
                         },
                     },
                     swap = {

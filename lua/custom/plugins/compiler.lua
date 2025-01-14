@@ -11,6 +11,8 @@ return {
             -- to add ANSI escape code support, add:
             baleia_setup = true,
             disable_swap = true,
+            debug = true,
+            shell = "nu.exe",
         }
 
         vim.keymap.set("n", "<leader>cc", function()

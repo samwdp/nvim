@@ -22,15 +22,14 @@ require("obsidian").setup({
         ["<leader>on"] = {
             action = function()
                 vim.api.nvim_command(":ObsidianNew ")
-                -- vim.ui.input({ prompt = "New File (no file extension): " }, function(input)
-                --     vim.api.nvim_command(":ObsidianNew " .. input .. ".md")
-                -- end)
             end,
+            opts = { desc = "[O]bsidian [N]ew" }
         },
         ["<leader>os"] = {
             action = function()
                 vim.api.nvim_command(":ObsidianSearch")
             end,
+            opts = { desc = "[O]bsidian [S]earch" },
         },
         ["gf"] = {
             action = function()
@@ -98,3 +97,12 @@ require("obsidian").setup({
         },
     }
 })
+
+vim.keymap.set("v", "<leader>oln", function()
+    vim.ui.input({
+            prompt = 'Enter link name: '
+        },
+        function(input)
+            vim.api.nvim_command(":ObsidianLinkNew " .. input)
+        end)
+end, { desc = "[O]bsian [L]ink [N]ew" })

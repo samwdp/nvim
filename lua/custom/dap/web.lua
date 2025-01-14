@@ -3,7 +3,7 @@ local dap = require("dap")
 dap.adapters.firefox = {
     type = 'executable',
     command = 'node',
-    args = { os.getenv("UserAppData") .. "/Local/nvim-data/mason/bin/firefox-debug-adapter.cmd" },
+    args = { os.getenv('UserAppData') .. '/Local/nvim-data/mason/packages/firefox-debug-adapter/dist/adapter.bundle.js' },
 }
 
 dap.configurations.typescript = {
@@ -13,10 +13,10 @@ dap.configurations.typescript = {
         request = 'launch',
         reAttach = true,
         url = function()
-            return vim.fn.input('Path to executable: ', 'http://localhost:' .. vim.fn.getcwd())
+            return vim.fn.input('Web URL: ', 'http://localhost:')
         end,
         -- url = 'http://localhost:3000',
         webRoot = '${workspaceFolder}',
-        firefoxExecutable = "C:/Program Files/Zen Twilight/zen.exe"
+        firefoxExecutable = "C:\\Program Files\\Zen Twilight\\zen.exe"
     }
 }

@@ -1,14 +1,29 @@
 return {
     {
         "seblj/roslyn.nvim",
+        ft = { "cs", "razor" },
+        init = function()
+            vim.filetype.add {
+                extension = {
+                    razor = 'razor',
+                    cshtml = 'razor',
+                },
+            }
+        end,
         dependencies = {
             "tris203/rzls.nvim",
         },
         config = function()
-            require("rzls").setup({})
+            -- require("rzls").setup()
             local capabilities = require('blink.cmp').get_lsp_capabilities()
-            require("roslyn").setup({
-                filewatching = true,
+            local attach = require 'custom.lspattach'
+
+            require('rzls').setup {
+                on_attach = attach,
+                capabilities = capabilities,
+            }
+
+            require('roslyn').setup {
                 args = {
                     '--logLevel=Information',
                     '--extensionLogDirectory=' .. vim.fs.dirname(vim.lsp.get_log_path()),
@@ -31,6 +46,7 @@ return {
                     ),
                 },
                 config = {
+                    on_attach = attach,
                     capabilities = capabilities,
                     handlers = require 'rzls.roslyn_handlers',
                     settings = {
@@ -50,7 +66,7 @@ return {
                         },
                     },
                 },
-            })
+            }
         end
     }
 }
