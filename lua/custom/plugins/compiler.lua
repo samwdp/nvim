@@ -6,15 +6,15 @@ return {
     },
     config = function()
         vim.g.compiler_state = false
+        local compile_funcs = require("custom.compiler")
+
         ---@type CompileModeOpts
         vim.g.compile_mode = {
-            -- to add ANSI escape code support, add:
             baleia_setup = true,
             disable_swap = true,
-            debug = true,
-            shell = "nu.exe",
+            shell = "cmd.exe",
+            default_command = compile_funcs.compile_command(),
         }
-
         vim.keymap.set("n", "<leader>cc", function()
             vim.api.nvim_command(":Compile")
             vim.g.compiler_state = true
@@ -28,5 +28,5 @@ return {
                 vim.g.compiler_state = true
             end
         end, { desc = "[C]ode [C]ompile/Recompile" })
-    end
+    end,
 }
