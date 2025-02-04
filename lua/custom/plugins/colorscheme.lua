@@ -21,7 +21,6 @@ return {
             invert_tabline = false,
             invert_intend_guides = false,
             inverse = false, -- invert background for search, diffs, statuslines and errors
-            palette_overrides = {},
             overrides = {
                 Comment = { link = "GruvboxGreenBold" },
                 Statement = { link = "GruvboxRedBold" },

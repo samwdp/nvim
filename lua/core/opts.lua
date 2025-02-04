@@ -1,5 +1,7 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
+vim.opt.wildignore:append { "*.pyc", "node_modules", "node_modules/**/*" }
+
 vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, { pattern = { "*.xaml" }, command = "setf xml" })
 vim.g.compiler_state = false;
 
