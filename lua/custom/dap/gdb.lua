@@ -13,8 +13,8 @@ dap.adapters.codelldb = {
 dap.adapters.cppdbg = {
     id = 'cppdbg',
     type = 'executable',
-    command =
-    "C:\\Users\\sam\\AppData\\Local\\nvim-data\\mason\\packages\\cpptools\\extension\\debugAdapters\\bin\\OpenDebugAD7.exe",
+    command = vim.fn.stdpath('data') ..
+        "/mason/packages/cpptools/extension/debugAdapters/bin/OpenDebugAD7",
     options = {
         detached = false
     }

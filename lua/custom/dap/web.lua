@@ -3,7 +3,7 @@ local dap = require("dap")
 dap.adapters.firefox = {
     type = 'executable',
     command = 'node',
-    args = { os.getenv('UserAppData') .. '/Local/nvim-data/mason/packages/firefox-debug-adapter/dist/adapter.bundle.js' },
+    args = { vim.fn.stdpath('data') .. '/Local/nvim-data/mason/packages/firefox-debug-adapter/dist/adapter.bundle.js' },
 }
 
 dap.configurations.typescript = {

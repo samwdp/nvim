@@ -1,7 +1,8 @@
 local dap = require("dap")
 dap.adapters.coreclr = {
     type = 'executable',
-    command = os.getenv("UserAppData") ..
+    -- get nvim data path
+    command = vim.fn.stdpath('data') ..
         "/Local/nvim-data/mason/packages/netcoredbg/netcoredbg/netcoredbg.exe",
     args = { '--interpreter=vscode' }
 }
