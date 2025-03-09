@@ -2,6 +2,7 @@ return { -- Autocompletion
     {
         'saghen/blink.cmp',
         dependencies = {
+            "giuxtaposition/blink-cmp-copilot",
             'rafamadriz/friendly-snippets',
             'kristijanhusak/vim-dadbod-completion',
             {
@@ -49,8 +50,20 @@ return { -- Autocompletion
                 window = { border = 'rounded' }
             },
             sources = {
-                default = { 'lsp', 'path', 'snippets', 'buffer', 'lazydev', 'dadbod',
-                    'obsidian', 'obsidian_tags', 'obsidian_new' },
+                default = { 'lsp',
+                    'path',
+                    'snippets',
+                    'buffer',
+                    'lazydev',
+                    'dadbod',
+                    'obsidian',
+                    'obsidian_tags',
+                    'obsidian_new',
+                    'avante_commands',
+                    'avante_mentions',
+                    'avante_files',
+                    'copilot',
+                },
                 providers = {
                     lsp = { fallbacks = { "lazydev" } },
                     lazydev = { name = "LazyDev", module = "lazydev.integrations.blink" },
@@ -67,65 +80,33 @@ return { -- Autocompletion
                         name = "obsidian_tags",
                         module = "blink.compat.source",
                     },
-                    supermaven = {
-                        name = "supermaven",
+                    avante_commands = {
+                        name = "avante_commands",
                         module = "blink.compat.source",
-                    }
+                        score_offset = 90, -- show at a higher priority than lsp
+                        opts = {},
+                    },
+                    avante_files = {
+                        name = "avante_files",
+                        module = "blink.compat.source",
+                        score_offset = 100, -- show at a higher priority than lsp
+                        opts = {},
+                    },
+                    avante_mentions = {
+                        name = "avante_mentions",
+                        module = "blink.compat.source",
+                        score_offset = 1000, -- show at a higher priority than lsp
+                        opts = {},
+                    },
+                    copilot = {
+                        name = "copilot",
+                        module = "blink-cmp-copilot",
+                        score_offset = 100,
+                        async = true,
+                    },
                 },
             },
         },
         opts_extend = { "sources.default" }
     },
-    -- {
-    --     'saghen/blink.cmp',
-    --     dependencies = {
-    --         'rafamadriz/friendly-snippets',
-    --         'kristijanhusak/vim-dadbod-completion',
-    --     },
-    --     version = 'v0.*',
-    --     opts = {
-    --         keymap = { preset = 'default' },
-    --
-    --         appearance = {
-    --             use_nvim_cmp_as_default = true,
-    --             nerd_font_variant = 'mono'
-    --         },
-    --
-    --         completion = {
-    --             menu = {
-    --                 border = 'rounded',
-    --                 draw = {
-    --                     columns = { { 'kind_icon' }, { 'label', 'label_description', gap = 1 }, { 'kind' } },
-    --                 }
-    --             },
-    --             documentation = {
-    --                 auto_show = true,
-    --                 window = {
-    --                     border = 'rounded',
-    --                     direction_priority = {
-    --                         menu_north = { 'e', 'w', },
-    --                         menu_south = { 'e', 'w', },
-    --                     },
-    --                 }
-    --             }
-    --         },
-    --
-    --         sources = {
-    --             default = { 'lsp', 'path', 'snippets', 'buffer', 'lazydev', 'dadbod' },
-    --             providers = {
-    --                 lsp = { fallback_for = { "lazydev" } },
-    --                 lazydev = { name = "LazyDev", module = "lazydev.integrations.blink" },
-    --                 dadbod = { name = "Dadbod", module = "vim_dadbod_completion.blink" },
-    --             },
-    --         },
-    --
-    --         signature = {
-    --             enabled = true,
-    --             window = {
-    --                 border = 'rounded',
-    --             },
-    --         }
-    --     },
-    --     opts_extend = { "sources.default" }
-    -- },
 }
