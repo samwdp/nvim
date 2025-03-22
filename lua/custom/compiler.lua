@@ -3,6 +3,7 @@ local extension_to_compile_command = {
     c = "gcc ",
     cpp = "g++ ",
     csproj = "dotnet build ",
+    cs = "dotnet build ",
     sln = "dotnet build ",
     zig = "zig build run",
     odin = "odin run ",
